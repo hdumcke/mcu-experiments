@@ -1,0 +1,153 @@
+
+<!DOCTYPE html>
+
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.19: https://docutils.sourceforge.io/" />
+
+    <title>Real Time Operating System &#8212; MCU experiments  documentation</title>
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="_static/alabaster.css" />
+    <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
+    <script src="_static/doctools.js"></script>
+    <script src="_static/sphinx_highlight.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Virtualisation" href="virt.html" />
+    <link rel="prev" title="Testing" href="testing.html" />
+   
+  <link rel="stylesheet" href="_static/custom.css" type="text/css" />
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
+
+  </head><body>
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          
+
+          <div class="body" role="main">
+            
+  <section id="real-time-operating-system">
+<h1>Real Time Operating System<a class="headerlink" href="#real-time-operating-system" title="Permalink to this heading">¶</a></h1>
+<section id="freertos">
+<h2>FreeRTOS<a class="headerlink" href="#freertos" title="Permalink to this heading">¶</a></h2>
+<section id="installation">
+<h3>Installation<a class="headerlink" href="#installation" title="Permalink to this heading">¶</a></h3>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>git<span class="w"> </span>clone<span class="w"> </span>https://github.com/FreeRTOS/FreeRTOS.git<span class="w"> </span>--recurse-submodules
+<span class="nb">cd</span><span class="w"> </span>FreeRTOS/FreeRTOS/Demo
+mkdir<span class="w"> </span>other
+<span class="nb">cd</span><span class="w"> </span>other
+git<span class="w"> </span>clone<span class="w"> </span>https://github.com/FreeRTOS/FreeRTOS-Community-Supported-Demos.git
+</pre></div>
+</div>
+</section>
+<section id="qemu-demo">
+<h3>Qemu Demo<a class="headerlink" href="#qemu-demo" title="Permalink to this heading">¶</a></h3>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="nb">cd</span><span class="w"> </span>FreeRTOS/FreeRTOS/Demo/CORTEX_MPS2_QEMU_IAR_GCC/build/gcc
+make
+qemu-system-arm<span class="w"> </span>-machine<span class="w"> </span>mps2-an385<span class="w"> </span>-cpu<span class="w"> </span>cortex-m3<span class="w"> </span>-kernel<span class="w"> </span>./output/RTOSDemo.out<span class="w"> </span>-monitor<span class="w"> </span>none<span class="w"> </span>-nographic<span class="w"> </span>-serial<span class="w"> </span>stdio
+</pre></div>
+</div>
+</section>
+<section id="pico-demo">
+<h3>Pico Demo<a class="headerlink" href="#pico-demo" title="Permalink to this heading">¶</a></h3>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="nb">cd</span><span class="w"> </span>FreeRTOS/Demo/other/FreeRTOS-Community-Supported-Demos/CORTEX_M0+_RP2040/
+mkdir<span class="w"> </span>build
+<span class="nb">cd</span><span class="w"> </span>build
+<span class="nv">PICO_SDK_PATH</span><span class="o">=</span>../../../../../../../Pico/pico-sdk/
+cmake<span class="w"> </span>..
+make<span class="w"> </span>-j4
+picotool<span class="w"> </span>load<span class="w"> </span>./Standard/main_blinky.uf2
+</pre></div>
+</div>
+</section>
+</section>
+</section>
+
+
+          </div>
+          
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+<h1 class="logo"><a href="index.html">MCU experiments</a></h1>
+
+
+
+
+
+
+
+
+<h3>Navigation</h3>
+<p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="intro.html">Introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="usecases.html">Use Cases</a></li>
+<li class="toctree-l1"><a class="reference internal" href="devenv.html">Development Environments</a></li>
+<li class="toctree-l1"><a class="reference internal" href="libs.html">Libraries</a></li>
+<li class="toctree-l1"><a class="reference internal" href="testing.html">Testing</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Real Time Operating System</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#freertos">FreeRTOS</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="virt.html">Virtualisation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="robot.html">Robot Example</a></li>
+<li class="toctree-l1"><a class="reference internal" href="micropython.html">Micro Python</a></li>
+<li class="toctree-l1"><a class="reference internal" href="microros.html">micro-ROS</a></li>
+</ul>
+
+<div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="index.html">Documentation overview</a><ul>
+      <li>Previous: <a href="testing.html" title="previous chapter">Testing</a></li>
+      <li>Next: <a href="virt.html" title="next chapter">Virtualisation</a></li>
+  </ul></li>
+</ul>
+</div>
+<div id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false"/>
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</div>
+<script>document.getElementById('searchbox').style.display = "block"</script>
+
+
+
+
+
+
+
+
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &copy;2024, Horst Dumcke.
+      
+      |
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 6.2.1</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.12</a>
+      
+      |
+      <a href="_sources/rtos.rst.txt"
+          rel="nofollow">Page source</a>
+    </div>
+
+    
+
+    
+  </body>
+</html>

@@ -1,0 +1,252 @@
+
+<!DOCTYPE html>
+
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.19: https://docutils.sourceforge.io/" />
+
+    <title>Development Environments &#8212; MCU experiments  documentation</title>
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="_static/alabaster.css" />
+    <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
+    <script src="_static/doctools.js"></script>
+    <script src="_static/sphinx_highlight.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Libraries" href="libs.html" />
+    <link rel="prev" title="Use Cases" href="usecases.html" />
+   
+  <link rel="stylesheet" href="_static/custom.css" type="text/css" />
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
+
+  </head><body>
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          
+
+          <div class="body" role="main">
+            
+  <section id="development-environments">
+<h1>Development Environments<a class="headerlink" href="#development-environments" title="Permalink to this heading">¶</a></h1>
+<section id="stm32">
+<h2>STM32<a class="headerlink" href="#stm32" title="Permalink to this heading">¶</a></h2>
+<p><a class="reference external" href="https://www.st.com/en/development-tools/stm32cubeide.html">https://www.st.com/en/development-tools/stm32cubeide.html</a></p>
+<p>Requires registration with ST</p>
+</section>
+<section id="esp32">
+<h2>esp32<a class="headerlink" href="#esp32" title="Permalink to this heading">¶</a></h2>
+<p><a class="reference external" href="https://docs.espressif.com/projects/esp-idf/en/stable/esp32/index.html">https://docs.espressif.com/projects/esp-idf/en/stable/esp32/index.html</a></p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>brew<span class="w"> </span>install<span class="w"> </span>cmake<span class="w"> </span>ninja<span class="w"> </span>dfu-util
+mkdir<span class="w"> </span>-p<span class="w"> </span>~/esp
+<span class="nb">cd</span><span class="w"> </span>~/esp
+git<span class="w"> </span>clone<span class="w"> </span>-b<span class="w"> </span>v5.2.1<span class="w"> </span>--recursive<span class="w"> </span>https://github.com/espressif/esp-idf.git
+<span class="nb">cd</span><span class="w"> </span>~/esp/esp-idf
+./install.sh<span class="w"> </span>esp32
+</pre></div>
+</div>
+<p>Building the examples:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>.<span class="w"> </span><span class="nv">$HOME</span>/esp/esp-idf/export.sh
+<span class="nb">cd</span><span class="w"> </span>~/esp/esp-idf/examples/get-started/hello_world
+idf.py<span class="w"> </span>set-target<span class="w"> </span>esp32
+idf.py<span class="w"> </span>menuconfig<span class="w">  </span><span class="c1"># not required for this simple application</span>
+idf.py<span class="w"> </span>-p<span class="w"> </span>/dev/cu.usbserial-0001<span class="w"> </span>flash<span class="w"> </span>monitor<span class="w">  </span><span class="c1"># use Ctrl + ] to exit monitor</span>
+</pre></div>
+</div>
+</section>
+<section id="arduino">
+<h2>Arduino<a class="headerlink" href="#arduino" title="Permalink to this heading">¶</a></h2>
+<p><a class="reference external" href="https://support.arduino.cc/hc/en-us/articles/360019833020-Download-and-install-Arduino-IDE">https://support.arduino.cc/hc/en-us/articles/360019833020-Download-and-install-Arduino-IDE</a> # only required if you want a GUI</p>
+<p><a class="reference external" href="https://github.com/arduino/arduino-cli">https://github.com/arduino/arduino-cli</a></p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>git<span class="w"> </span>clone<span class="w"> </span>https://github.com/arduino/arduino-examples
+<span class="nb">cd</span><span class="w"> </span>arduino-examples/examples/01.Basics/Blink/
+arduino-cli<span class="w"> </span>board<span class="w"> </span>list<span class="w">  </span><span class="c1"># provides board name and port</span>
+arduino-cli<span class="w"> </span>compile<span class="w"> </span>-b<span class="w"> </span>arduino:avr:uno<span class="w"> </span>--output-dir<span class="w"> </span>build<span class="w"> </span>.
+arduino-cli<span class="w"> </span>upload<span class="w"> </span>-b<span class="w"> </span>arduino:avr:uno<span class="w"> </span>.
+</pre></div>
+</div>
+</section>
+<section id="teensy">
+<h2>Teensy<a class="headerlink" href="#teensy" title="Permalink to this heading">¶</a></h2>
+<p><a class="reference external" href="https://www.pjrc.com/teensy/loader.html">https://www.pjrc.com/teensy/loader.html</a>
+<a class="reference external" href="https://github.com/PaulStoffregen/teensy_loader_cli">https://github.com/PaulStoffregen/teensy_loader_cli</a></p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>git<span class="w"> </span>clone<span class="w"> </span>https://github.com/arduino/arduino-examples
+<span class="nb">cd</span><span class="w"> </span>arduino-examples/examples/01.Basics/Blink/
+arduino-cli<span class="w"> </span>board<span class="w"> </span>list<span class="w">  </span><span class="c1"># provides board name and port</span>
+arduino-cli<span class="w"> </span>compile<span class="w"> </span>-b<span class="w"> </span>teensy:avr:teensy41<span class="w"> </span>.
+teensy_loader_cli<span class="w"> </span>-w<span class="w"> </span>-s<span class="w"> </span>--mcu<span class="o">=</span>TEENSY41<span class="w"> </span>build/Blink.ino.hex
+</pre></div>
+</div>
+<p>TODO: needs more work</p>
+<p>Reset the Teensy to it’s shipping program, by holding in the program button for something like 20 seconds, until the small led near the USB blinks and then release.</p>
+<p>TODO: Teensy support for RPi</p>
+</section>
+<section id="rp2040">
+<h2>RP2040<a class="headerlink" href="#rp2040" title="Permalink to this heading">¶</a></h2>
+<p><a class="reference external" href="https://datasheets.raspberrypi.com/pico/getting-started-with-pico.pdf">https://datasheets.raspberrypi.com/pico/getting-started-with-pico.pdf</a></p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>brew<span class="w"> </span>install<span class="w"> </span>cmake
+brew<span class="w"> </span>tap<span class="w"> </span>ArmMbed/homebrew-formulae
+brew<span class="w"> </span>install<span class="w"> </span>gcc-arm-embedded
+mkdir<span class="w"> </span>Pico
+<span class="nb">cd</span><span class="w"> </span>./Pico/
+<span class="nv">PICODIR</span><span class="o">=</span><span class="k">$(</span><span class="nb">pwd</span><span class="k">)</span>
+git<span class="w"> </span>clone<span class="w"> </span>--recursive<span class="w"> </span>-b<span class="w"> </span>master<span class="w"> </span>https://github.com/raspberrypi/pico-sdk.git
+git<span class="w"> </span>clone<span class="w"> </span>-b<span class="w"> </span>master<span class="w"> </span>https://github.com/raspberrypi/pico-examples.git
+</pre></div>
+</div>
+<p>Building the examples:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>mkdir<span class="w"> </span><span class="nv">$PICODIR</span>/pico-examples/build
+<span class="nb">cd</span><span class="w"> </span><span class="nv">$PICODIR</span>/pico-examples/build
+<span class="nb">export</span><span class="w"> </span><span class="nv">PICO_SDK_PATH</span><span class="o">=</span>../../pico-sdk
+cmake<span class="w"> </span>..
+make
+</pre></div>
+</div>
+<section id="picotool">
+<h3>picotool<a class="headerlink" href="#picotool" title="Permalink to this heading">¶</a></h3>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>brew<span class="w"> </span>install<span class="w"> </span>libusb<span class="w"> </span>pkg-config
+git<span class="w"> </span>clone<span class="w"> </span>https://github.com/raspberrypi/picotool.git<span class="w"> </span>--branch<span class="w"> </span>master
+<span class="nb">cd</span><span class="w"> </span>picotool
+mkdir<span class="w"> </span>build
+<span class="nb">cd</span><span class="w"> </span>build
+<span class="nb">export</span><span class="w"> </span><span class="nv">PICO_SDK_PATH</span><span class="o">=</span>../../pico-sdk
+cmake<span class="w"> </span>..
+make
+</pre></div>
+</div>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="nb">cd</span><span class="w"> </span><span class="nv">$PICODIR</span>/pico-examples/build
+<span class="nv">$PICODIR</span>/picotool/build/picotool<span class="w"> </span>info<span class="w"> </span>-a
+<span class="nv">$PICODIR</span>/picotool/build/picotool<span class="w"> </span>load<span class="w"> </span>./hello_world/usb/hello_usb.uf2
+<span class="nv">$PICODIR</span>/picotool/build/picotool<span class="w"> </span>reboot
+screen<span class="w"> </span>/dev/cu.usbmodem1424301
+</pre></div>
+</div>
+</section>
+</section>
+<section id="arduino-ide">
+<h2>Arduino IDE<a class="headerlink" href="#arduino-ide" title="Permalink to this heading">¶</a></h2>
+<p><a class="reference external" href="https://www.youtube.com/watch?v=nL34zDTPkcs">https://www.youtube.com/watch?v=nL34zDTPkcs</a></p>
+<p><a class="reference external" href="https://www.arduino.cc/reference/en/">https://www.arduino.cc/reference/en/</a></p>
+</section>
+<section id="vs-code">
+<h2>VS Code<a class="headerlink" href="#vs-code" title="Permalink to this heading">¶</a></h2>
+<p><a class="reference external" href="https://code.visualstudio.com">https://code.visualstudio.com</a></p>
+</section>
+<section id="platformio">
+<h2>PlatformIO<a class="headerlink" href="#platformio" title="Permalink to this heading">¶</a></h2>
+<p><a class="reference external" href="https://platformio.org/install/ide?install=vscode">https://platformio.org/install/ide?install=vscode</a></p>
+</section>
+<section id="debugger">
+<h2>Debugger<a class="headerlink" href="#debugger" title="Permalink to this heading">¶</a></h2>
+</section>
+<section id="openocd">
+<h2>OpenOCD<a class="headerlink" href="#openocd" title="Permalink to this heading">¶</a></h2>
+<p>OpenOCD stands for Open On-Chip Debugger. It aims to provide debugging, in-system program- ming and boundary-scan testing for embedded target devices.</p>
+<p>Detail can be found in the user guide <a class="reference external" href="https://openocd.org/doc/pdf/openocd.pdf">https://openocd.org/doc/pdf/openocd.pdf</a></p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>brew<span class="w"> </span>install<span class="w"> </span>openocd
+</pre></div>
+</div>
+</section>
+<section id="pyocd">
+<h2>pyOCD<a class="headerlink" href="#pyocd" title="Permalink to this heading">¶</a></h2>
+<p><a class="reference external" href="https://pyocd.io">https://pyocd.io</a></p>
+</section>
+</section>
+
+
+          </div>
+          
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+<h1 class="logo"><a href="index.html">MCU experiments</a></h1>
+
+
+
+
+
+
+
+
+<h3>Navigation</h3>
+<p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="intro.html">Introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="usecases.html">Use Cases</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Development Environments</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#stm32">STM32</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#esp32">esp32</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#arduino">Arduino</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#teensy">Teensy</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#rp2040">RP2040</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#arduino-ide">Arduino IDE</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#vs-code">VS Code</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#platformio">PlatformIO</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#debugger">Debugger</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#openocd">OpenOCD</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#pyocd">pyOCD</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="libs.html">Libraries</a></li>
+<li class="toctree-l1"><a class="reference internal" href="testing.html">Testing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="rtos.html">Real Time Operating System</a></li>
+<li class="toctree-l1"><a class="reference internal" href="virt.html">Virtualisation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="robot.html">Robot Example</a></li>
+<li class="toctree-l1"><a class="reference internal" href="micropython.html">Micro Python</a></li>
+<li class="toctree-l1"><a class="reference internal" href="microros.html">micro-ROS</a></li>
+</ul>
+
+<div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="index.html">Documentation overview</a><ul>
+      <li>Previous: <a href="usecases.html" title="previous chapter">Use Cases</a></li>
+      <li>Next: <a href="libs.html" title="next chapter">Libraries</a></li>
+  </ul></li>
+</ul>
+</div>
+<div id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false"/>
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</div>
+<script>document.getElementById('searchbox').style.display = "block"</script>
+
+
+
+
+
+
+
+
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &copy;2024, Horst Dumcke.
+      
+      |
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 6.2.1</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.12</a>
+      
+      |
+      <a href="_sources/devenv.rst.txt"
+          rel="nofollow">Page source</a>
+    </div>
+
+    
+
+    
+  </body>
+</html>
