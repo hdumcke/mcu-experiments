@@ -34,8 +34,10 @@
             
   <section id="real-time-operating-system">
 <h1>Real Time Operating System<a class="headerlink" href="#real-time-operating-system" title="Permalink to this heading">¶</a></h1>
+<p><a class="reference external" href="https://micro.ros.org/docs/concepts/rtos/comparison/">https://micro.ros.org/docs/concepts/rtos/comparison/</a></p>
 <section id="freertos">
 <h2>FreeRTOS<a class="headerlink" href="#freertos" title="Permalink to this heading">¶</a></h2>
+<p><a class="reference external" href="https://www.freertos.org">https://www.freertos.org</a></p>
 <section id="installation">
 <h3>Installation<a class="headerlink" href="#installation" title="Permalink to this heading">¶</a></h3>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>git<span class="w"> </span>clone<span class="w"> </span>https://github.com/FreeRTOS/FreeRTOS.git<span class="w"> </span>--recurse-submodules
@@ -63,6 +65,80 @@ mkdir<span class="w"> </span>build
 cmake<span class="w"> </span>..
 make<span class="w"> </span>-j4
 picotool<span class="w"> </span>load<span class="w"> </span>./Standard/main_blinky.uf2
+</pre></div>
+</div>
+</section>
+</section>
+<section id="zephyr">
+<h2>Zephyr<a class="headerlink" href="#zephyr" title="Permalink to this heading">¶</a></h2>
+<p><a class="reference external" href="https://www.zephyrproject.org">https://www.zephyrproject.org</a></p>
+<p><a class="reference external" href="https://docs.zephyrproject.org/latest/develop/getting_started/index.html">https://docs.zephyrproject.org/latest/develop/getting_started/index.html</a></p>
+<section id="install-on-macos">
+<h3>Install on MacOS<a class="headerlink" href="#install-on-macos" title="Permalink to this heading">¶</a></h3>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>brew<span class="w"> </span>install<span class="w"> </span>cmake<span class="w"> </span>ninja<span class="w"> </span>gperf<span class="w"> </span>python3<span class="w"> </span>ccache<span class="w"> </span>qemu<span class="w"> </span>dtc<span class="w"> </span>libmagic<span class="w"> </span>wget<span class="w"> </span>openocd
+mkvirtualenv<span class="w"> </span>zephyr
+<span class="k">$(</span>which<span class="w"> </span>pip<span class="k">)</span><span class="w"> </span>install<span class="w"> </span>west
+west<span class="w"> </span>init<span class="w"> </span>~/zephyrproject
+<span class="nb">cd</span><span class="w"> </span>~/zephyrproject
+west<span class="w"> </span>update
+west<span class="w"> </span>zephyr-export
+<span class="k">$(</span>which<span class="w"> </span>pip<span class="k">)</span><span class="w"> </span>install<span class="w"> </span>-r<span class="w"> </span>~/zephyrproject/zephyr/scripts/requirements.txt
+<span class="nb">cd</span><span class="w"> </span>~
+curl<span class="w"> </span>-L<span class="w"> </span>-O<span class="w"> </span>https://github.com/zephyrproject-rtos/sdk-ng/releases/download/v0.16.5-1/zephyr-sdk-0.16.5-1_macos-x86_64.tar.xz
+curl<span class="w"> </span>-L<span class="w"> </span>https://github.com/zephyrproject-rtos/sdk-ng/releases/download/v0.16.5-1/sha256.sum<span class="w"> </span><span class="p">|</span><span class="w"> </span>shasum<span class="w"> </span>--check<span class="w"> </span>--ignore-missing
+tar<span class="w"> </span>xvf<span class="w"> </span>zephyr-sdk-0.16.5-1_macos-x86_64.tar.xz
+<span class="nb">cd</span><span class="w"> </span>zephyr-sdk-0.16.5-1
+./setup.sh
+
+<span class="nb">cd</span><span class="w"> </span>~/zephyrproject/zephyr
+west<span class="w"> </span>build<span class="w"> </span>-b<span class="w"> </span>qemu_x86<span class="w"> </span>samples/hello_world
+west<span class="w"> </span>build<span class="w"> </span>-t<span class="w"> </span>run
+</pre></div>
+</div>
+</section>
+</section>
+<section id="nuttx">
+<h2>NuttX<a class="headerlink" href="#nuttx" title="Permalink to this heading">¶</a></h2>
+<p><a class="reference external" href="https://nuttx.apache.org">https://nuttx.apache.org</a></p>
+<section id="id1">
+<h3>Install on MacOS<a class="headerlink" href="#id1" title="Permalink to this heading">¶</a></h3>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="w"> </span>brew<span class="w"> </span>tap<span class="w"> </span>discoteq/discoteq
+<span class="w"> </span>brew<span class="w"> </span>install<span class="w"> </span>flock
+<span class="w"> </span>brew<span class="w"> </span>install<span class="w"> </span>x86_64-elf-gcc<span class="w">  </span><span class="c1"># Used by simulator</span>
+<span class="w"> </span>brew<span class="w"> </span>install<span class="w"> </span>u-boot-tools<span class="w">  </span><span class="c1"># Some platform integrate with u-boot</span>
+
+<span class="w"> </span><span class="nb">cd</span><span class="w"> </span>/tmp
+<span class="w"> </span>git<span class="w"> </span>clone<span class="w"> </span>https://bitbucket.org/nuttx/tools.git
+<span class="w"> </span><span class="nb">cd</span><span class="w"> </span>tools/kconfig-frontends
+<span class="w"> </span>patch<span class="w"> </span>&lt;<span class="w"> </span>../kconfig-macos.diff<span class="w"> </span>-p<span class="w"> </span><span class="m">1</span>
+<span class="w"> </span>./configure<span class="w"> </span>--enable-mconf<span class="w"> </span>--disable-shared<span class="w"> </span>--enable-static<span class="w"> </span>--disable-gconf<span class="w"> </span>--disable-qconf<span class="w"> </span>--disable-nconf
+<span class="w"> </span>make
+<span class="w"> </span>sudo<span class="w"> </span>make<span class="w"> </span>install
+
+<span class="w"> </span>brew<span class="w"> </span>install<span class="w"> </span>--cask<span class="w"> </span>gcc-arm-embedded
+
+<span class="w"> </span>mkdir<span class="w"> </span>nuttxspace
+<span class="w"> </span><span class="nb">cd</span><span class="w"> </span>nuttxspace
+<span class="w"> </span>git<span class="w"> </span>clone<span class="w"> </span>https://github.com/apache/nuttx.git<span class="w"> </span>nuttx
+<span class="w"> </span>git<span class="w"> </span>clone<span class="w"> </span>https://github.com/apache/nuttx-apps<span class="w"> </span>apps
+
+<span class="w"> </span><span class="c1"># Prerequisites For macOS</span>
+<span class="w"> </span><span class="nb">cd</span><span class="w"> </span>/tmp
+<span class="w"> </span>git<span class="w"> </span>clone<span class="w"> </span>https://github.com/chexum/genromfs.git
+<span class="w"> </span><span class="nb">cd</span><span class="w"> </span>genromfs
+<span class="w"> </span>make
+<span class="w"> </span>sudo<span class="w"> </span>cp<span class="w"> </span>genromfs<span class="w"> </span>/usr/local/bin/
+
+<span class="w"> </span><span class="c1"># To list all supported configurations</span>
+<span class="w"> </span><span class="nb">cd</span><span class="w"> </span>nuttx
+<span class="w"> </span>./tools/configure.sh<span class="w"> </span>-L<span class="w"> </span><span class="p">|</span><span class="w"> </span>less
+
+./tools/configure.sh<span class="w"> </span>-m<span class="w"> </span>sim:nsh
+make<span class="w"> </span>menuconfig<span class="w">  </span><span class="c1"># optional</span>
+make
+
+./nuttx<span class="w">  </span><span class="c1"># login: admin password: Administrator</span>
+nsh&gt;<span class="w"> </span>poweroff
 </pre></div>
 </div>
 </section>
@@ -95,12 +171,15 @@ picotool<span class="w"> </span>load<span class="w"> </span>./Standard/main_blin
 <li class="toctree-l1"><a class="reference internal" href="testing.html">Testing</a></li>
 <li class="toctree-l1 current"><a class="current reference internal" href="#">Real Time Operating System</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="#freertos">FreeRTOS</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#zephyr">Zephyr</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#nuttx">NuttX</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="virt.html">Virtualisation</a></li>
 <li class="toctree-l1"><a class="reference internal" href="robot.html">Robot Example</a></li>
 <li class="toctree-l1"><a class="reference internal" href="micropython.html">Micro Python</a></li>
 <li class="toctree-l1"><a class="reference internal" href="microros.html">micro-ROS</a></li>
+<li class="toctree-l1"><a class="reference internal" href="architecture.html">Architecture</a></li>
 </ul>
 
 <div class="relations">

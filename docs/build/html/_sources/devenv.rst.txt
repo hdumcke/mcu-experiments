@@ -1,12 +1,53 @@
 Development Environments
 ========================
 
+Status
+------
++-------------+--------+-------------------------+---------+
+|             | Mac OS | Raspberry Pi            | Windows |
++=============+========+=========================+=========+
+| CubeIDE     | OK     | n/a                     | ?       |
++-------------+--------+-------------------------+---------+
+| esp-idf     | OK     | OK                      | ?       |
++-------------+--------+-------------------------+---------+
+| Arduino-cli | OK     | OK                      | ?       |
++-------------+--------+-------------------------+---------+
+| Teensy      | OK     | not working on bookworm | ?       |
++-------------+--------+-------------------------+---------+
+| RP2040      | OK     | OK                      | ?       |
++-------------+--------+-------------------------+---------+
+| VS Code     | OK     | OK                      | ?       |
++-------------+--------+-------------------------+---------+
+| PlatformIO  | ?      | ?                       | ?       |
++-------------+--------+-------------------------+---------+
+| gdb         |        |                         | ?       |
++-------------+--------+-------------------------+---------+
+| OpenOCD     |        |                         | ?       |
++-------------+--------+-------------------------+---------+
+| pyOCD       |        |                         | ?       |
++-------------+--------+-------------------------+---------+
+| Debug Probe |        |                         | ?       |
++-------------+--------+-------------------------+---------+
+
 STM32
 -----
+
+Installation of CubeIDE
+^^^^^^^^^^^^^^^^^^^^^^^
 
 https://www.st.com/en/development-tools/stm32cubeide.html
 
 Requires registration with ST
+
+Example Program
+^^^^^^^^^^^^^^^
+
+https://wiki.st.com/stm32mcu/wiki/STM32StepByStep:Step2_Blink_LED
+
+On Raspberry Pi
+^^^^^^^^^^^^^^^
+
+TODO: Try binutils-arm-none-eabi tool chain
 
 esp32
 -----
@@ -52,6 +93,7 @@ Teensy
 ------
 
 https://www.pjrc.com/teensy/loader.html
+
 https://github.com/PaulStoffregen/teensy_loader_cli
 
 .. code-block:: bash
@@ -59,14 +101,14 @@ https://github.com/PaulStoffregen/teensy_loader_cli
    git clone https://github.com/arduino/arduino-examples
    cd arduino-examples/examples/01.Basics/Blink/
    arduino-cli board list  # provides board name and port
-   arduino-cli compile -b teensy:avr:teensy41 .
-   teensy_loader_cli -w -s --mcu=TEENSY41 build/Blink.ino.hex
+   arduino-cli compile -b teensy:avr:teensy41 --output-dir build .
+   teensy_loader_cli -w -s --mcu=TEENSY41 build/Blink.ino.hex # push reset button (Mac OS)
    
-TODO: needs more work   
+TODO: reset not supported on Mac OS, is there an other solution?
 
 Reset the Teensy to it's shipping program, by holding in the program button for something like 20 seconds, until the small led near the USB blinks and then release. 
 
-TODO: Teensy support for RPi
+TODO: Teensy support for RPi (Bookworm) Aparently is wi working for Ubuntu
 
 RP2040
 ------
@@ -94,6 +136,8 @@ Building the examples:
    cmake ..
    make
    
+Note: Integration into Arduino https://www.tomshardware.com/how-to/program-raspberry-pi-pico-with-arduino-ide
+   
 picotool
 ^^^^^^^^
 
@@ -107,6 +151,8 @@ picotool
    export PICO_SDK_PATH=../../pico-sdk
    cmake ..
    make
+   
+Flash example:
 
 .. code-block:: bash
 
@@ -115,6 +161,37 @@ picotool
    $PICODIR/picotool/build/picotool load ./hello_world/usb/hello_usb.uf2
    $PICODIR/picotool/build/picotool reboot
    screen /dev/cu.usbmodem1424301
+   
+Raspberry Pi Debug Probe
+^^^^^^^^^^^^^^^^^^^^^^^^
+
+https://www.raspberrypi.com/documentation/microcontrollers/debug-probe.html#serial-wire-debug-swd
+
+Flash example:
+
+.. code-block:: bash
+
+   cd $PICODIR/pico-examples/build
+   openocd -f interface/cmsis-dap.cfg -f target/rp2040.cfg -c "adapter speed 5000" -c "program blink/blink.elf verify reset exit"
+   
+Debug example:
+
+.. code-block:: bash
+
+   openocd -f interface/cmsis-dap.cfg -f target/rp2040.cfg -c "adapter speed 5000"
+
+2nd terminal
+
+.. code-block:: bash
+
+   cd $PICODIR/pico-examples/build/blink
+   gdb blink.elf
+   target remote localhost:3333
+   monitor reset init
+   continue
+
+TODO: compile with debugging symbols
+      Run debugger with vi
    
 Arduino IDE
 -----------
@@ -128,13 +205,54 @@ VS Code
 
 https://code.visualstudio.com
 
+Install on Mac OS
+~~~~~~~~~~~~~~~~~
+
+Download and install MacOS installer
+
+Install on Raspberry Pi
+~~~~~~~~~~~~~~~~~~~~~~~
+
+.. code-block:: bash
+
+   sudo apt update
+   sudo apt install code
+
+
 PlatformIO
 ----------
 
 https://platformio.org/install/ide?install=vscode
+
+Install on Mac OS
+~~~~~~~~~~~~~~~~~
+
+.. code-block:: bash
+
+   brew install platformio
+   cd /tmp
+   git clone https://github.com/platformio/platform-teensy.git
+   cd platform-teensy/examples/arduino-blink
+   pio run -e teensy41
+   pio run -e teensy41 --target upload
+   pio run --target clean
+   
+   # new project
+   mkdir -p /tmp/TeensyTest
+   pio project init -d /tmp/TeensyTest --board teensy41 --project-option "framework=arduino"
+   
    
 Debugger
 --------
+
+gdb
+^^^
+
+https://en.wikipedia.org/wiki/GNU_Debugger
+
+https://sourceware.org/gdb/current/onlinedocs/gdb.html/
+
+https://sourceware.org/gdb/wiki/Internals
 
 OpenOCD
 -------
@@ -151,4 +269,10 @@ pyOCD
 -----
 
 https://pyocd.io
+
+Create a Python virtual environment and install with
+
+.. code-block:: bash
+
+   pip install pyocd
 

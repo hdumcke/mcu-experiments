@@ -35,6 +35,35 @@
   <section id="micro-python">
 <h1>Micro Python<a class="headerlink" href="#micro-python" title="Permalink to this heading">¶</a></h1>
 <p><a class="reference external" href="https://micropython.org">https://micropython.org</a></p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="nb">cd</span><span class="w"> </span>/tmp
+wget<span class="w"> </span>https://micropython.org/download/rp2-pico/rp2-pico-latest.uf2
+<span class="nv">$PICODIR</span>/picotool/build/picotool<span class="w"> </span>load<span class="w"> </span>/tmp/rp2-pico-latest.uf2
+cu.usbmodem1414301<span class="w"> </span><span class="c1"># python shell</span>
+&gt;&gt;&gt;<span class="w"> </span>import<span class="w"> </span>sys
+&gt;&gt;&gt;<span class="w"> </span>sys.implementation
+&gt;&gt;&gt;<span class="w"> </span>print<span class="o">(</span><span class="s2">&quot;Hello, Pico!&quot;</span><span class="o">)</span>
+Hello,<span class="w"> </span>Pico!
+&gt;&gt;&gt;<span class="w"> </span>from<span class="w"> </span>machine<span class="w"> </span>import<span class="w"> </span>Pin
+&gt;&gt;&gt;<span class="w"> </span><span class="nv">led</span><span class="w"> </span><span class="o">=</span><span class="w"> </span>Pin<span class="o">(</span><span class="s2">&quot;LED&quot;</span>,<span class="w"> </span>Pin.OUT<span class="o">)</span>
+&gt;&gt;&gt;<span class="w"> </span>led.value<span class="o">(</span><span class="m">1</span><span class="o">)</span>
+&gt;&gt;&gt;<span class="w"> </span>led.value<span class="o">(</span><span class="m">0</span><span class="o">)</span>
+</pre></div>
+</div>
+<section id="rshell">
+<h2>rshell<a class="headerlink" href="#rshell" title="Permalink to this heading">¶</a></h2>
+<p>Installation:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>sudo<span class="w"> </span>pip3<span class="w"> </span>install<span class="w"> </span>rshell
+</pre></div>
+</div>
+<p>Sample session:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="nb">cd</span><span class="w"> </span><span class="nv">$PICODIR</span>/pico-micropython-examples/blink/
+rshell
+cp<span class="w"> </span>blink.py<span class="w"> </span>/pyboard/main.py
+ls<span class="w"> </span>-l<span class="w"> </span>/pyboard
+repl<span class="w"> </span>~<span class="w"> </span>machine.reset<span class="o">()</span><span class="w"> </span>~
+</pre></div>
+</div>
+</section>
 </section>
 
 
@@ -64,8 +93,12 @@
 <li class="toctree-l1"><a class="reference internal" href="rtos.html">Real Time Operating System</a></li>
 <li class="toctree-l1"><a class="reference internal" href="virt.html">Virtualisation</a></li>
 <li class="toctree-l1"><a class="reference internal" href="robot.html">Robot Example</a></li>
-<li class="toctree-l1 current"><a class="current reference internal" href="#">Micro Python</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Micro Python</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#rshell">rshell</a></li>
+</ul>
+</li>
 <li class="toctree-l1"><a class="reference internal" href="microros.html">micro-ROS</a></li>
+<li class="toctree-l1"><a class="reference internal" href="architecture.html">Architecture</a></li>
 </ul>
 
 <div class="relations">

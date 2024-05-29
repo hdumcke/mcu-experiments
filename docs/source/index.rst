@@ -20,5 +20,6 @@ Welcome to MCU experiments's documentation!
    robot
    micropython
    microros
+   architecture
 
 

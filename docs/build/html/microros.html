@@ -14,6 +14,7 @@
     <script src="_static/sphinx_highlight.js"></script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Architecture" href="architecture.html" />
     <link rel="prev" title="Micro Python" href="micropython.html" />
    
   <link rel="stylesheet" href="_static/custom.css" type="text/css" />
@@ -34,6 +35,60 @@
   <section id="micro-ros">
 <h1>micro-ROS<a class="headerlink" href="#micro-ros" title="Permalink to this heading">¶</a></h1>
 <p><a class="reference external" href="https://micro.ros.org">https://micro.ros.org</a></p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="c1"># install ROS2 Humble on Ubuntu 22.04</span>
+<span class="c1"># Source the ROS 2 installation</span>
+<span class="nb">source</span><span class="w"> </span>/opt/ros/<span class="nv">$ROS_DISTRO</span>/setup.bash
+
+<span class="c1"># Create a workspace and download the micro-ROS tools</span>
+mkdir<span class="w"> </span>microros_ws
+<span class="nb">cd</span><span class="w"> </span>microros_ws
+git<span class="w"> </span>clone<span class="w"> </span>-b<span class="w"> </span><span class="nv">$ROS_DISTRO</span><span class="w"> </span>https://github.com/micro-ROS/micro_ros_setup.git<span class="w"> </span>src/micro_ros_setup
+
+<span class="c1"># Update dependencies using rosdep</span>
+sudo<span class="w"> </span>apt<span class="w"> </span>update<span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span>rosdep<span class="w"> </span>update
+rosdep<span class="w"> </span>install<span class="w"> </span>--from-paths<span class="w"> </span>src<span class="w"> </span>--ignore-src<span class="w"> </span>-y
+
+<span class="c1"># Install pip</span>
+sudo<span class="w"> </span>apt-get<span class="w"> </span>install<span class="w"> </span>-y<span class="w"> </span>python3-pip
+
+<span class="c1"># Build micro-ROS tools and source them</span>
+colcon<span class="w"> </span>build
+<span class="nb">source</span><span class="w"> </span>install/local_setup.bash
+
+<span class="c1"># Create firmware step</span>
+ros2<span class="w"> </span>run<span class="w"> </span>micro_ros_setup<span class="w"> </span>create_firmware_ws.sh<span class="w"> </span>host
+
+<span class="c1"># Build step</span>
+ros2<span class="w"> </span>run<span class="w"> </span>micro_ros_setup<span class="w"> </span>build_firmware.sh
+<span class="nb">source</span><span class="w"> </span>install/local_setup.bash
+
+<span class="c1"># Download micro-ROS-Agent packages</span>
+ros2<span class="w"> </span>run<span class="w"> </span>micro_ros_setup<span class="w"> </span>create_agent_ws.sh
+
+<span class="c1"># Build step</span>
+ros2<span class="w"> </span>run<span class="w"> </span>micro_ros_setup<span class="w"> </span>build_agent.sh
+<span class="nb">source</span><span class="w"> </span>install/local_setup.bash
+
+<span class="c1"># Run a micro-ROS agent</span>
+ros2<span class="w"> </span>run<span class="w"> </span>micro_ros_agent<span class="w"> </span>micro_ros_agent<span class="w"> </span>udp4<span class="w"> </span>--port<span class="w"> </span><span class="m">8888</span>
+
+<span class="c1">#  in another command line, run the micro-ROS node</span>
+<span class="nb">source</span><span class="w"> </span>/opt/ros/<span class="nv">$ROS_DISTRO</span>/setup.bash
+<span class="nb">source</span><span class="w"> </span>~/microros_ws/install/local_setup.bash
+
+<span class="c1"># Use RMW Micro XRCE-DDS implementation</span>
+<span class="nb">export</span><span class="w"> </span><span class="nv">RMW_IMPLEMENTATION</span><span class="o">=</span>rmw_microxrcedds
+
+<span class="c1"># Run a micro-ROS node</span>
+ros2<span class="w"> </span>run<span class="w"> </span>micro_ros_demos_rclc<span class="w"> </span>ping_pong
+
+<span class="c1">#  in another command line, test the micro-ROS app</span>
+<span class="nb">source</span><span class="w"> </span>/opt/ros/<span class="nv">$ROS_DISTRO</span>/setup.bash
+
+<span class="c1"># Subscribe to micro-ROS ping topic</span>
+ros2<span class="w"> </span>topic<span class="w"> </span><span class="nb">echo</span><span class="w"> </span>/microROS/ping
+</pre></div>
+</div>
 </section>
 
 
@@ -65,6 +120,7 @@
 <li class="toctree-l1"><a class="reference internal" href="robot.html">Robot Example</a></li>
 <li class="toctree-l1"><a class="reference internal" href="micropython.html">Micro Python</a></li>
 <li class="toctree-l1 current"><a class="current reference internal" href="#">micro-ROS</a></li>
+<li class="toctree-l1"><a class="reference internal" href="architecture.html">Architecture</a></li>
 </ul>
 
 <div class="relations">
@@ -72,6 +128,7 @@
 <ul>
   <li><a href="index.html">Documentation overview</a><ul>
       <li>Previous: <a href="micropython.html" title="previous chapter">Micro Python</a></li>
+      <li>Next: <a href="architecture.html" title="next chapter">Architecture</a></li>
   </ul></li>
 </ul>
 </div>

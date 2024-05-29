@@ -34,10 +34,90 @@
             
   <section id="development-environments">
 <h1>Development Environments<a class="headerlink" href="#development-environments" title="Permalink to this heading">¶</a></h1>
+<section id="status">
+<h2>Status<a class="headerlink" href="#status" title="Permalink to this heading">¶</a></h2>
+<table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"></th>
+<th class="head"><p>Mac OS</p></th>
+<th class="head"><p>Raspberry Pi</p></th>
+<th class="head"><p>Windows</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>CubeIDE</p></td>
+<td><p>OK</p></td>
+<td><p>n/a</p></td>
+<td><p>?</p></td>
+</tr>
+<tr class="row-odd"><td><p>esp-idf</p></td>
+<td><p>OK</p></td>
+<td><p>OK</p></td>
+<td><p>?</p></td>
+</tr>
+<tr class="row-even"><td><p>Arduino-cli</p></td>
+<td><p>OK</p></td>
+<td><p>OK</p></td>
+<td><p>?</p></td>
+</tr>
+<tr class="row-odd"><td><p>Teensy</p></td>
+<td><p>OK</p></td>
+<td><p>not working on bookworm</p></td>
+<td><p>?</p></td>
+</tr>
+<tr class="row-even"><td><p>RP2040</p></td>
+<td><p>OK</p></td>
+<td><p>OK</p></td>
+<td><p>?</p></td>
+</tr>
+<tr class="row-odd"><td><p>VS Code</p></td>
+<td><p>OK</p></td>
+<td><p>OK</p></td>
+<td><p>?</p></td>
+</tr>
+<tr class="row-even"><td><p>PlatformIO</p></td>
+<td><p>?</p></td>
+<td><p>?</p></td>
+<td><p>?</p></td>
+</tr>
+<tr class="row-odd"><td><p>gdb</p></td>
+<td></td>
+<td></td>
+<td><p>?</p></td>
+</tr>
+<tr class="row-even"><td><p>OpenOCD</p></td>
+<td></td>
+<td></td>
+<td><p>?</p></td>
+</tr>
+<tr class="row-odd"><td><p>pyOCD</p></td>
+<td></td>
+<td></td>
+<td><p>?</p></td>
+</tr>
+<tr class="row-even"><td><p>Debug Probe</p></td>
+<td></td>
+<td></td>
+<td><p>?</p></td>
+</tr>
+</tbody>
+</table>
+</section>
 <section id="stm32">
 <h2>STM32<a class="headerlink" href="#stm32" title="Permalink to this heading">¶</a></h2>
+<section id="installation-of-cubeide">
+<h3>Installation of CubeIDE<a class="headerlink" href="#installation-of-cubeide" title="Permalink to this heading">¶</a></h3>
 <p><a class="reference external" href="https://www.st.com/en/development-tools/stm32cubeide.html">https://www.st.com/en/development-tools/stm32cubeide.html</a></p>
 <p>Requires registration with ST</p>
+</section>
+<section id="example-program">
+<h3>Example Program<a class="headerlink" href="#example-program" title="Permalink to this heading">¶</a></h3>
+<p><a class="reference external" href="https://wiki.st.com/stm32mcu/wiki/STM32StepByStep:Step2_Blink_LED">https://wiki.st.com/stm32mcu/wiki/STM32StepByStep:Step2_Blink_LED</a></p>
+</section>
+<section id="on-raspberry-pi">
+<h3>On Raspberry Pi<a class="headerlink" href="#on-raspberry-pi" title="Permalink to this heading">¶</a></h3>
+<p>TODO: Try binutils-arm-none-eabi tool chain</p>
+</section>
 </section>
 <section id="esp32">
 <h2>esp32<a class="headerlink" href="#esp32" title="Permalink to this heading">¶</a></h2>
@@ -73,18 +153,18 @@ arduino-cli<span class="w"> </span>upload<span class="w"> </span>-b<span class="
 </section>
 <section id="teensy">
 <h2>Teensy<a class="headerlink" href="#teensy" title="Permalink to this heading">¶</a></h2>
-<p><a class="reference external" href="https://www.pjrc.com/teensy/loader.html">https://www.pjrc.com/teensy/loader.html</a>
-<a class="reference external" href="https://github.com/PaulStoffregen/teensy_loader_cli">https://github.com/PaulStoffregen/teensy_loader_cli</a></p>
+<p><a class="reference external" href="https://www.pjrc.com/teensy/loader.html">https://www.pjrc.com/teensy/loader.html</a></p>
+<p><a class="reference external" href="https://github.com/PaulStoffregen/teensy_loader_cli">https://github.com/PaulStoffregen/teensy_loader_cli</a></p>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>git<span class="w"> </span>clone<span class="w"> </span>https://github.com/arduino/arduino-examples
 <span class="nb">cd</span><span class="w"> </span>arduino-examples/examples/01.Basics/Blink/
 arduino-cli<span class="w"> </span>board<span class="w"> </span>list<span class="w">  </span><span class="c1"># provides board name and port</span>
-arduino-cli<span class="w"> </span>compile<span class="w"> </span>-b<span class="w"> </span>teensy:avr:teensy41<span class="w"> </span>.
-teensy_loader_cli<span class="w"> </span>-w<span class="w"> </span>-s<span class="w"> </span>--mcu<span class="o">=</span>TEENSY41<span class="w"> </span>build/Blink.ino.hex
+arduino-cli<span class="w"> </span>compile<span class="w"> </span>-b<span class="w"> </span>teensy:avr:teensy41<span class="w"> </span>--output-dir<span class="w"> </span>build<span class="w"> </span>.
+teensy_loader_cli<span class="w"> </span>-w<span class="w"> </span>-s<span class="w"> </span>--mcu<span class="o">=</span>TEENSY41<span class="w"> </span>build/Blink.ino.hex<span class="w"> </span><span class="c1"># push reset button (Mac OS)</span>
 </pre></div>
 </div>
-<p>TODO: needs more work</p>
+<p>TODO: reset not supported on Mac OS, is there an other solution?</p>
 <p>Reset the Teensy to it’s shipping program, by holding in the program button for something like 20 seconds, until the small led near the USB blinks and then release.</p>
-<p>TODO: Teensy support for RPi</p>
+<p>TODO: Teensy support for RPi (Bookworm) Aparently is wi working for Ubuntu</p>
 </section>
 <section id="rp2040">
 <h2>RP2040<a class="headerlink" href="#rp2040" title="Permalink to this heading">¶</a></h2>
@@ -107,6 +187,7 @@ cmake<span class="w"> </span>..
 make
 </pre></div>
 </div>
+<p>Note: Integration into Arduino <a class="reference external" href="https://www.tomshardware.com/how-to/program-raspberry-pi-pico-with-arduino-ide">https://www.tomshardware.com/how-to/program-raspberry-pi-pico-with-arduino-ide</a></p>
 <section id="picotool">
 <h3>picotool<a class="headerlink" href="#picotool" title="Permalink to this heading">¶</a></h3>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>brew<span class="w"> </span>install<span class="w"> </span>libusb<span class="w"> </span>pkg-config
@@ -119,6 +200,7 @@ cmake<span class="w"> </span>..
 make
 </pre></div>
 </div>
+<p>Flash example:</p>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="nb">cd</span><span class="w"> </span><span class="nv">$PICODIR</span>/pico-examples/build
 <span class="nv">$PICODIR</span>/picotool/build/picotool<span class="w"> </span>info<span class="w"> </span>-a
 <span class="nv">$PICODIR</span>/picotool/build/picotool<span class="w"> </span>load<span class="w"> </span>./hello_world/usb/hello_usb.uf2
@@ -126,6 +208,31 @@ make
 screen<span class="w"> </span>/dev/cu.usbmodem1424301
 </pre></div>
 </div>
+</section>
+<section id="raspberry-pi-debug-probe">
+<h3>Raspberry Pi Debug Probe<a class="headerlink" href="#raspberry-pi-debug-probe" title="Permalink to this heading">¶</a></h3>
+<p><a class="reference external" href="https://www.raspberrypi.com/documentation/microcontrollers/debug-probe.html#serial-wire-debug-swd">https://www.raspberrypi.com/documentation/microcontrollers/debug-probe.html#serial-wire-debug-swd</a></p>
+<p>Flash example:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="nb">cd</span><span class="w"> </span><span class="nv">$PICODIR</span>/pico-examples/build
+openocd<span class="w"> </span>-f<span class="w"> </span>interface/cmsis-dap.cfg<span class="w"> </span>-f<span class="w"> </span>target/rp2040.cfg<span class="w"> </span>-c<span class="w"> </span><span class="s2">&quot;adapter speed 5000&quot;</span><span class="w"> </span>-c<span class="w"> </span><span class="s2">&quot;program blink/blink.elf verify reset exit&quot;</span>
+</pre></div>
+</div>
+<p>Debug example:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>openocd<span class="w"> </span>-f<span class="w"> </span>interface/cmsis-dap.cfg<span class="w"> </span>-f<span class="w"> </span>target/rp2040.cfg<span class="w"> </span>-c<span class="w"> </span><span class="s2">&quot;adapter speed 5000&quot;</span>
+</pre></div>
+</div>
+<p>2nd terminal</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="nb">cd</span><span class="w"> </span><span class="nv">$PICODIR</span>/pico-examples/build/blink
+gdb<span class="w"> </span>blink.elf
+target<span class="w"> </span>remote<span class="w"> </span>localhost:3333
+monitor<span class="w"> </span>reset<span class="w"> </span>init
+<span class="k">continue</span>
+</pre></div>
+</div>
+<dl class="simple">
+<dt>TODO: compile with debugging symbols</dt><dd><p>Run debugger with vi</p>
+</dd>
+</dl>
 </section>
 </section>
 <section id="arduino-ide">
@@ -136,13 +243,37 @@ screen<span class="w"> </span>/dev/cu.usbmodem1424301
 <section id="vs-code">
 <h2>VS Code<a class="headerlink" href="#vs-code" title="Permalink to this heading">¶</a></h2>
 <p><a class="reference external" href="https://code.visualstudio.com">https://code.visualstudio.com</a></p>
+<p>Download and install MacOS installer</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>sudo<span class="w"> </span>apt<span class="w"> </span>update
+sudo<span class="w"> </span>apt<span class="w"> </span>install<span class="w"> </span>code
+</pre></div>
+</div>
 </section>
 <section id="platformio">
 <h2>PlatformIO<a class="headerlink" href="#platformio" title="Permalink to this heading">¶</a></h2>
 <p><a class="reference external" href="https://platformio.org/install/ide?install=vscode">https://platformio.org/install/ide?install=vscode</a></p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>brew<span class="w"> </span>install<span class="w"> </span>platformio
+<span class="nb">cd</span><span class="w"> </span>/tmp
+git<span class="w"> </span>clone<span class="w"> </span>https://github.com/platformio/platform-teensy.git
+<span class="nb">cd</span><span class="w"> </span>platform-teensy/examples/arduino-blink
+pio<span class="w"> </span>run<span class="w"> </span>-e<span class="w"> </span>teensy41
+pio<span class="w"> </span>run<span class="w"> </span>-e<span class="w"> </span>teensy41<span class="w"> </span>--target<span class="w"> </span>upload
+pio<span class="w"> </span>run<span class="w"> </span>--target<span class="w"> </span>clean
+
+<span class="c1"># new project</span>
+mkdir<span class="w"> </span>-p<span class="w"> </span>/tmp/TeensyTest
+pio<span class="w"> </span>project<span class="w"> </span>init<span class="w"> </span>-d<span class="w"> </span>/tmp/TeensyTest<span class="w"> </span>--board<span class="w"> </span>teensy41<span class="w"> </span>--project-option<span class="w"> </span><span class="s2">&quot;framework=arduino&quot;</span>
+</pre></div>
+</div>
 </section>
 <section id="debugger">
 <h2>Debugger<a class="headerlink" href="#debugger" title="Permalink to this heading">¶</a></h2>
+<section id="gdb">
+<h3>gdb<a class="headerlink" href="#gdb" title="Permalink to this heading">¶</a></h3>
+<p><a class="reference external" href="https://en.wikipedia.org/wiki/GNU_Debugger">https://en.wikipedia.org/wiki/GNU_Debugger</a></p>
+<p><a class="reference external" href="https://sourceware.org/gdb/current/onlinedocs/gdb.html/">https://sourceware.org/gdb/current/onlinedocs/gdb.html/</a></p>
+<p><a class="reference external" href="https://sourceware.org/gdb/wiki/Internals">https://sourceware.org/gdb/wiki/Internals</a></p>
+</section>
 </section>
 <section id="openocd">
 <h2>OpenOCD<a class="headerlink" href="#openocd" title="Permalink to this heading">¶</a></h2>
@@ -155,6 +286,10 @@ screen<span class="w"> </span>/dev/cu.usbmodem1424301
 <section id="pyocd">
 <h2>pyOCD<a class="headerlink" href="#pyocd" title="Permalink to this heading">¶</a></h2>
 <p><a class="reference external" href="https://pyocd.io">https://pyocd.io</a></p>
+<p>Create a Python virtual environment and install with</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>pip<span class="w"> </span>install<span class="w"> </span>pyocd
+</pre></div>
+</div>
 </section>
 </section>
 
@@ -180,6 +315,7 @@ screen<span class="w"> </span>/dev/cu.usbmodem1424301
 <li class="toctree-l1"><a class="reference internal" href="intro.html">Introduction</a></li>
 <li class="toctree-l1"><a class="reference internal" href="usecases.html">Use Cases</a></li>
 <li class="toctree-l1 current"><a class="current reference internal" href="#">Development Environments</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#status">Status</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#stm32">STM32</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#esp32">esp32</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#arduino">Arduino</a></li>
@@ -200,6 +336,7 @@ screen<span class="w"> </span>/dev/cu.usbmodem1424301
 <li class="toctree-l1"><a class="reference internal" href="robot.html">Robot Example</a></li>
 <li class="toctree-l1"><a class="reference internal" href="micropython.html">Micro Python</a></li>
 <li class="toctree-l1"><a class="reference internal" href="microros.html">micro-ROS</a></li>
+<li class="toctree-l1"><a class="reference internal" href="architecture.html">Architecture</a></li>
 </ul>
 
 <div class="relations">
