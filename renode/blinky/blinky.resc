@@ -1,0 +1,20 @@
+logFile $ORIGIN/blinky-renode.log True
+
+using sysbus
+$name?="rpi_pico"
+mach create $name
+
+machine LoadPlatformDescription $ORIGIN/blinky.repl
+
+showAnalyzer uart0
+uart0 RecordToAsciinema $ORIGIN/blinky-asciinema
+
+macro reset
+"""
+    sysbus LoadELF @https://zephyr-dashboard.renode.io/zephyr/af57038bb053a6e60b0583af27b8ef7df3650ed2/rpi_pico/blinky/blinky.elf
+    cpu0 VectorTableOffset `sysbus GetSymbolAddress "_vector_table"`
+    cpu1 IsHalted true
+    cpu0 EnableProfilerCollapsedStack $ORIGIN/blinky-profile true
+"""
+
+runMacro $reset
