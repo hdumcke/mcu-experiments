@@ -19,37 +19,37 @@ TODO
 FPU
 ^^^
 
-TODO
+https://en.wikipedia.org/wiki/Floating-point_unit
 
 ADC
 ^^^
 
-TODO
+https://en.wikipedia.org/wiki/Analog-to-digital_converter
 
 DAC
 ^^^
 
-TODO
+https://en.wikipedia.org/wiki/Digital-to-analog_converter
 
 PWM
 ^^^
 
-TODO
+https://en.wikipedia.org/wiki/Pulse-width_modulation
 
 SPI
 ^^^
 
-TODO
+https://en.wikipedia.org/wiki/Serial_Peripheral_Interface
 
 I2C
 ^^^
 
-TODO
+https://en.wikipedia.org/wiki/I²C
 
 CAN
 ^^^
 
-TODO
+https://en.wikipedia.org/wiki/CAN_bus
 
 Timers
 ^^^^^^
@@ -59,7 +59,7 @@ TODO
 GPIO
 ^^^^
 
-TODO
+https://en.wikipedia.org/wiki/General-purpose_input/output
 
 PIO
 ^^^
@@ -96,8 +96,6 @@ https://docs.arduino.cc/resources/datasheets/A000066-datasheet.pdf
 
 Feature Overview
 ----------------
-
-TODO: add table
 
 +------------+----------------------+--------------------+---------------+------------------+--------------+
 |            | Nucleo F446RE        | ESP-WROOM-32       | Teensy 4.1    | RPi Pico         | UNO          |

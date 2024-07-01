@@ -18,7 +18,7 @@ Status
 +-------------+--------+-------------------------+---------+
 | VS Code     | OK     | OK                      | ?       |
 +-------------+--------+-------------------------+---------+
-| PlatformIO  | ?      | ?                       | ?       |
+| PlatformIO  | OK     | OK                      | ?       |
 +-------------+--------+-------------------------+---------+
 | gdb         |        |                         | ?       |
 +-------------+--------+-------------------------+---------+
@@ -108,7 +108,7 @@ TODO: reset not supported on Mac OS, is there an other solution?
 
 Reset the Teensy to it's shipping program, by holding in the program button for something like 20 seconds, until the small led near the USB blinks and then release. 
 
-TODO: Teensy support for RPi (Bookworm) Aparently is wi working for Ubuntu
+TODO: Teensy support for RPi (Bookworm) Apparently it is working for Ubuntu
 
 RP2040
 ------
@@ -206,12 +206,12 @@ VS Code
 https://code.visualstudio.com
 
 Install on Mac OS
-~~~~~~~~~~~~~~~~~
+^^^^^^^^^^^^^^^^^
 
 Download and install MacOS installer
 
 Install on Raspberry Pi
-~~~~~~~~~~~~~~~~~~~~~~~
+^^^^^^^^^^^^^^^^^^^^^^^
 
 .. code-block:: bash
 
@@ -225,7 +225,7 @@ PlatformIO
 https://platformio.org/install/ide?install=vscode
 
 Install on Mac OS
-~~~~~~~~~~~~~~~~~
+^^^^^^^^^^^^^^^^^
 
 .. code-block:: bash
 
@@ -240,8 +240,69 @@ Install on Mac OS
    # new project
    mkdir -p /tmp/TeensyTest
    pio project init -d /tmp/TeensyTest --board teensy41 --project-option "framework=arduino"
+
+VI Ingetreation
+^^^^^^^^^^^^^^^
+
+https://github.com/normen/vim-pio
+
+Install on Raspberry PI
+^^^^^^^^^^^^^^^^^^^^^^^
+
+See directory raspberry4/pio/
+
+Status
+^^^^^^
+
+Compiling and uploading blink executing the following commands
+
+.. code-block:: bash
+
+   cd ~/pio-exampes/uno/examples/arduino-blink
+   pio run -e uno --target upload
    
-   
+   cd ~/pio-exampes/uno/examples/arduino-blink
+   echo "[env:nanoatmega328]" >> platformio.ini
+   echo "platform = atmelavr" >> platformio.ini
+   echo "board = nanoatmega328" >> platformio.ini
+   echo "framework = arduino" >> platformio.ini
+   pio run -e nanoatmega328 --target upload
+
+   cd ~/pio-exampes/esp32/examples/espidf-arduino-blink
+   pio run -e esp32dev --target upload
+
+   cd ~/pio-exampes/stm32/examples/arduino-blink/
+   sed -i "s/f401/f446/" platformio.ini
+   pio run -e nucleo_f446re --target upload
+
+   cd ~/pio-exampes/pico/examples/arduino-blink
+   sed -i "/board = pico/a \ \ toolchain-gccarmnoneeabi@~1.90301.0" platformio.ini
+   sed -i "/board = pico/a platform_packages =" platformio.ini
+   sed -i "/board = pico/a debug_speed = 5000" platformio.ini
+   sed -i "/board = pico/a upload_protocol = picotool" platformio.ini
+   pio run -e pico --target upload
+
++-------+--------+--------------+---------+
+|       | Mac OS | Raspberry Pi | Windows |
++=======+========+==============+=========+
+| uno   | OK     | OK           | ?       |
++-------+--------+--------------+---------+
+| nano  | NOT OK | NOT OK       | ?       |
++-------+--------+--------------+---------+
+| esp32 | OK     | OK           | ?       |
++-------+--------+--------------+---------+
+| stm32 | NOT OK | OK           | ?       |
++-------+--------+--------------+---------+
+| pico  | OK     | OK           | ?       |
++-------+--------+--------------+---------+
+  
+ToDo
+^^^^
+
+Investigate error message for stm32 on MacOS: "** OpenOCD init failed **"
+
+Investigate error message for nano: "avrdude: stk500_recv(): programmer is not responding"
+
 Debugger
 --------
 

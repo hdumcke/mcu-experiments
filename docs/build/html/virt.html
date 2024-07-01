@@ -34,7 +34,48 @@
             
   <section id="virtualisation">
 <h1>Virtualisation<a class="headerlink" href="#virtualisation" title="Permalink to this heading">¶</a></h1>
-<p>How to virtualize an embedded device?</p>
+<section id="quemu">
+<h2>Quemu<a class="headerlink" href="#quemu" title="Permalink to this heading">¶</a></h2>
+<p><a class="reference external" href="https://www.qemu.org">https://www.qemu.org</a></p>
+</section>
+<section id="renode">
+<h2>Renode<a class="headerlink" href="#renode" title="Permalink to this heading">¶</a></h2>
+<p><a class="reference external" href="https://github.com/renode/renode">https://github.com/renode/renode</a></p>
+<p><a class="reference external" href="https://renode.io">https://renode.io</a></p>
+<p><a class="reference external" href="https://interrupt.memfault.com/blog/intro-to-renode">https://interrupt.memfault.com/blog/intro-to-renode</a></p>
+<p><a class="reference external" href="https://github.com/tarciszera/renode_guide">https://github.com/tarciszera/renode_guide</a></p>
+<section id="installation-for-macos">
+<h3>Installation for MacOS<a class="headerlink" href="#installation-for-macos" title="Permalink to this heading">¶</a></h3>
+<p><a class="reference external" href="https://download.mono-project.com/archive/2.10.6/macos-10-x86/1/MonoFramework-MRE-2.10.6_1.macos10.xamarin.x86.dmg">https://download.mono-project.com/archive/2.10.6/macos-10-x86/1/MonoFramework-MRE-2.10.6_1.macos10.xamarin.x86.dmg</a></p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="nb">cd</span><span class="w"> </span>/tmp
+wget<span class="w"> </span>https://download.mono-project.com/archive/6.12.0/macos-10-universal/MonoFramework-MDK-6.12.0.206.macos10.xamarin.universal.pkg
+open<span class="w"> </span>MonoFramework-MDK-6.12.0.206.macos10.xamarin.universal.pkg
+<span class="c1"># install package</span>
+<span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;export PATH=/Library/Frameworks/Mono.framework/Versions/Current/bin:\$PATH&quot;</span><span class="w"> </span>&gt;&gt;<span class="w"> </span>~/.bash_profile
+wget<span class="w"> </span>https://github.com/renode/renode/releases/download/v1.15.0/renode_1.15.0.dmg
+open<span class="w"> </span>renode_1.15.0.dmg
+<span class="c1"># drag to application folder</span>
+<span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;&quot;</span><span class="w"> </span>&gt;&gt;<span class="w"> </span>~/.bash_profile
+<span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;#required for renode&quot;</span><span class="w"> </span>&gt;&gt;<span class="w"> </span>~/.bash_profile
+<span class="nb">echo</span><span class="w"> </span><span class="nv">PATH</span><span class="o">=</span>/Library/Frameworks/Mono.framework/Versions/Current/bin:<span class="se">\$</span>PATH<span class="w"> </span>&gt;&gt;<span class="w"> </span>~/.bash_profile
+mkvirtualenv<span class="w"> </span>renode
+./renode/setup-wirtenv.sh
+</pre></div>
+</div>
+</section>
+<section id="platformio-integration">
+<h3>PlatformIO Integration<a class="headerlink" href="#platformio-integration" title="Permalink to this heading">¶</a></h3>
+<p><a class="reference external" href="https://github.com/carlosedp/PlatformIO-Renode-Demos">https://github.com/carlosedp/PlatformIO-Renode-Demos</a></p>
+</section>
+</section>
+<section id="wokwi">
+<h2>Wokwi<a class="headerlink" href="#wokwi" title="Permalink to this heading">¶</a></h2>
+<p><a class="reference external" href="https://wokwi.com">https://wokwi.com</a></p>
+</section>
+<section id="tinkercad">
+<h2>TinkerCAD<a class="headerlink" href="#tinkercad" title="Permalink to this heading">¶</a></h2>
+<p><a class="reference external" href="https://www.tinkercad.com/circuits">https://www.tinkercad.com/circuits</a></p>
+</section>
 </section>
 
 
@@ -62,7 +103,13 @@
 <li class="toctree-l1"><a class="reference internal" href="libs.html">Libraries</a></li>
 <li class="toctree-l1"><a class="reference internal" href="testing.html">Testing</a></li>
 <li class="toctree-l1"><a class="reference internal" href="rtos.html">Real Time Operating System</a></li>
-<li class="toctree-l1 current"><a class="current reference internal" href="#">Virtualisation</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Virtualisation</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#quemu">Quemu</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#renode">Renode</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#wokwi">Wokwi</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#tinkercad">TinkerCAD</a></li>
+</ul>
+</li>
 <li class="toctree-l1"><a class="reference internal" href="robot.html">Robot Example</a></li>
 <li class="toctree-l1"><a class="reference internal" href="micropython.html">Micro Python</a></li>
 <li class="toctree-l1"><a class="reference internal" href="microros.html">micro-ROS</a></li>

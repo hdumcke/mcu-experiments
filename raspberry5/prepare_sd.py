@@ -66,9 +66,8 @@ ask_questions()
 if args.cache:
     write_cache(conf_file)
 
-kernel_file = os.path.join(target_environment['sd_path'], 'vmlinuz')
 network_conf_file = os.path.join(target_environment['sd_path'], 'network-config')
-if not os.path.exists(kernel_file):
+if not os.path.exists(network_conf_file):
     sys.exit("Invalid path to SD card or SD card not mounted\n")
 
 network_conf = """version: 2
@@ -98,7 +97,8 @@ packages:
 - git
 - openssh-server
 - python-is-python3
-- python3-virtualenv
+- python3-venv
+- curl
 """
 
 with open(user_data_file, 'w') as fh:
