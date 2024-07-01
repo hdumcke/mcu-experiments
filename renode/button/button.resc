@@ -15,16 +15,15 @@ uart0 RecordToAsciinema $ORIGIN/button-asciinema
 
 macro reset
 """
-    sysbus LoadELF @./b2.elf
     sysbus LoadELF @../../zephyr/button/build/zephyr/zephyr.elf
 #    cpu0 VectorTableOffset `sysbus GetSymbolAddress "__VECTOR_TABLE"`
     cpu0 VectorTableOffset 0x0000000010000100
     cpu1 IsHalted true
-    cpu0 EnableProfilerCollapsedStack $ORIGIN/hello_world-profile true
+    cpu0 EnableProfilerCollapsedStack $ORIGIN/button-profile true
 """
 
 runMacro $reset
 
-machine StartGdbServer 3333
+# machine StartGdbServer 3333
 
-start
+# start

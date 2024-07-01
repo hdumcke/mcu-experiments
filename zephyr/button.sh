@@ -8,7 +8,7 @@ cp -r ~/zephyrproject/zephyr/samples/basic/button .
 cd button
 source ~/zephyrproject/zephyr/zephyr-env.sh
 
-west build -b nucleo_f411re
+# west build -b nucleo_f411re
 
 cat > app.overlay << EOF
 / {
