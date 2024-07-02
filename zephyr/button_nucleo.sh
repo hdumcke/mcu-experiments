@@ -4,6 +4,7 @@
 BASEDIR=$( cd -- "$( dirname -- "${BASH_SOURCE[0]}" )" &> /dev/null && pwd )
 
 cd $BASEDIR
+rm -rf button_nucleo
 cp -r ~/zephyrproject/zephyr/samples/basic/button button_nucleo
 cd button_nucleo
 source ~/zephyrproject/zephyr/zephyr-env.sh

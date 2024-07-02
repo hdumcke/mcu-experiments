@@ -4,6 +4,7 @@
 BASEDIR=$( cd -- "$( dirname -- "${BASH_SOURCE[0]}" )" &> /dev/null && pwd )
 
 cd $BASEDIR
+rm -rf my-workspace
 west init -m https://github.com/zephyrproject-rtos/example-application --mr main my-workspace
 cd my-workspace
 west update
