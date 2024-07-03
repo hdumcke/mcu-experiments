@@ -1,0 +1,40 @@
+21:52:00.8661 [INFO] System bus created.
+21:52:01.9124 [INFO] sysbus: Loaded SVD: /var/folders/r6/s0f1n47d7qx_2d8cw3vpqbpw0000gn/T/renode-15586/be34354e-9dae-49a2-959e-f6bff7859aa1.tmp. Name: STM32F40x. Description: STM32F40x.
+21:52:01.9285 [WARNING] The font 'Roboto Mono' defined in the config file cannot be loaded.
+21:52:02.0027 [INFO] sysbus: Loading segment of 16068 bytes length at 0x8000000.
+21:52:02.0162 [INFO] sysbus: Loading segment of 118 bytes length at 0x8003EC4.
+21:52:02.0164 [INFO] sysbus: Loading segment of 4 bytes length at 0x8003F3A.
+21:52:02.0165 [INFO] sysbus: Loading segment of 4424 bytes length at 0x20000078.
+21:52:26.0323 [INFO] cpu0: Setting initial values: PC = 0x80009E5, SP = 0x20001180.
+21:52:26.0333 [INFO] nucleo_f411re: Machine started.
+21:52:26.0884 [WARNING] nvic0: Changing value of the SHCSR register to 0x70000, the register isn't supported by Renode
+21:52:26.0904 [WARNING] nvic0: Unhandled write to offset 0xD2C, value 0xFFFFFFFF.
+21:52:26.0938 [WARNING] sysbus: Read from an unimplemented register FLASH:ACR (0x40023C00), returning a value from SVD: 0x0.
+21:52:26.0943 [WARNING] sysbus: Write of value 0x100 to an unimplemented register FLASH:ACR (0x40023C00) generated from SVD.
+21:52:26.0944 [WARNING] sysbus: Read from an unimplemented register FLASH:ACR (0x40023C00), returning a value from SVD: 0x0.
+21:52:26.0944 [WARNING] sysbus: Write of value 0x200 to an unimplemented register FLASH:ACR (0x40023C00) generated from SVD.
+21:52:26.0945 [WARNING] sysbus: Read from an unimplemented register FLASH:ACR (0x40023C00), returning a value from SVD: 0x0.
+21:52:26.0945 [WARNING] sysbus: Write of value 0x400 to an unimplemented register FLASH:ACR (0x40023C00) generated from SVD.
+21:52:26.0951 [WARNING] sysbus: Read from an unimplemented register PWR:CR (0x40007000), returning a value from SVD: 0x0.
+21:52:26.0954 [WARNING] sysbus: Read from an unimplemented register PWR:CR (0x40007000), returning a value from SVD: 0x0.
+21:52:26.0955 [WARNING] sysbus: Read from an unimplemented register PWR:CR (0x40007000), returning a value from SVD: 0x0.
+21:52:26.0956 [WARNING] sysbus: Read from an unimplemented register FLASH:ACR (0x40023C00), returning a value from SVD: 0x0.
+21:52:26.0956 [WARNING] sysbus: Write of value 0x0 to an unimplemented register FLASH:ACR (0x40023C00) generated from SVD.
+21:52:26.0957 [WARNING] sysbus: Read from an unimplemented register FLASH:ACR (0x40023C00), returning a value from SVD: 0x0.
+21:52:26.0994 [WARNING] rcc: Unhandled write to offset 0x0. Unhandled bits: [18] when writing value 0x40483. Tags: HSEBYP (0x1).
+21:52:26.0998 [WARNING] sysbus: Read from an unimplemented register DBG:DBGMCU_CR (0xE0042004), returning a value from SVD: 0x0.
+21:52:26.0999 [WARNING] sysbus: Write of value 0x0 to an unimplemented register DBG:DBGMCU_CR (0xE0042004) generated from SVD.
+21:52:26.1076 [WARNING] usart2: Unhandled read from offset 0x14.
+21:52:26.1078 [WARNING] usart2: Unhandled write to offset 0x14, value 0x0.
+21:52:26.1099 [WARNING] usart1: Unhandled read from offset 0x14.
+21:52:26.1100 [WARNING] usart1: Unhandled write to offset 0x14, value 0x0.
+21:52:26.1287 [WARNING] sysbus: Read from an unimplemented register SYSCFG:EXTICR4 (0x40013814), returning a value from SVD: 0x0.
+21:52:26.1288 [WARNING] sysbus: Write of value 0x20 to an unimplemented register SYSCFG:EXTICR4 (0x40013814) generated from SVD.
+21:52:26.1288 [WARNING] sysbus: Read from an unimplemented register EXTI:FTSR (0x40013C0C), returning a value from SVD: 0x0.
+21:52:26.1289 [WARNING] sysbus: Write of value 0x2000 to an unimplemented register EXTI:FTSR (0x40013C0C) generated from SVD.
+21:52:26.1289 [WARNING] sysbus: Read from an unimplemented register EXTI:RTSR (0x40013C08), returning a value from SVD: 0x0.
+21:52:26.1290 [WARNING] sysbus: Write of value 0x0 to an unimplemented register EXTI:RTSR (0x40013C08) generated from SVD.
+21:52:26.1290 [WARNING] sysbus: Read from an unimplemented register EXTI:IMR (0x40013C00), returning a value from SVD: 0x0.
+21:52:26.1291 [WARNING] sysbus: Write of value 0x2000 to an unimplemented register EXTI:IMR (0x40013C00) generated from SVD.
+21:53:28.3493 [INFO] nucleo_f411re: Machine paused.
+21:53:28.3791 [INFO] nucleo_f411re: Disposed.

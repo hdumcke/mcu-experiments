@@ -1,0 +1,19 @@
+logFile $ORIGIN/button-renode.log True
+
+using sysbus
+$name?="nucleo_f411re"
+mach create $name
+
+machine LoadPlatformDescription $ORIGIN/button.repl
+
+showAnalyzer usart2
+usart2 RecordToAsciinema $ORIGIN/button-asciinema
+
+macro reset
+"""
+    sysbus LoadELF @../../zephyr/button_nucleo/build/zephyr/zephyr.elf
+    cpu0 VectorTableOffset `sysbus GetSymbolAddress "_vector_table"`
+    cpu0 EnableProfilerCollapsedStack $ORIGIN/button-profile true
+"""
+
+runMacro $reset
