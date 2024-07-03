@@ -38,7 +38,10 @@
 __pycache__/
 *.py[cod]
 
-zephyr/button
+zephyr/button_pico
+zephyr/button_nucleo
+zephyr/button_esp32
+zephyr/hello_world_esp32
 zephyr/my-workspace
 renode/button/button.log*
 renode/button/button.repl
