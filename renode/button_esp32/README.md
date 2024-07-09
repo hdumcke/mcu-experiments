@@ -4,5 +4,5 @@
 
 ```
 pip install git+https://github.com/antmicro/dts2repl.git
-dts2repl --output button.repl ../../zephyr/button_pico/build/zephyr/zephyr.dts
+dts2repl --output button.repl ../../zephyr/button_esp32/build/zephyr/zephyr.dts
 ```

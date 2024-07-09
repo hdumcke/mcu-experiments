@@ -1,4 +1,4 @@
-logFile $ORIGIN/blinky-renode.log True
+logFile $ORIGIN/blinky.log True
 
 using sysbus
 $name?="nucleo_f411re"
@@ -11,7 +11,7 @@ usart2 RecordToAsciinema $ORIGIN/blinky-asciinema
 
 macro reset
 """
-    sysbus LoadELF @https://zephyr-dashboard.renode.io/zephyr/af57038bb053a6e60b0583af27b8ef7df3650ed2/nucleo_f411re/blinky/blinky.elf
+    sysbus LoadELF $ORIGIN/../../zephyr/blinky_nucleo/build/zephyr/zephyr.elf
     cpu0 VectorTableOffset `sysbus GetSymbolAddress "_vector_table"`
     cpu0 EnableProfilerCollapsedStack $ORIGIN/blinky-profile true
 """

@@ -6,6 +6,7 @@ $name?="rpi_pico"
 mach create $name
 
 machine LoadPlatformDescription $ORIGIN/button.repl
+machine LoadPlatformDescriptionFromString "button: Miscellaneous.Button @ gpio0 { IRQ -> gpio0@0x1c }"
 
 cpu0 LogFunctionNames true
 
@@ -15,9 +16,8 @@ uart0 RecordToAsciinema $ORIGIN/button-asciinema
 
 macro reset
 """
-    sysbus LoadELF @../../zephyr/button/build/zephyr/zephyr.elf
-#    cpu0 VectorTableOffset `sysbus GetSymbolAddress "__VECTOR_TABLE"`
-    cpu0 VectorTableOffset 0x0000000010000100
+    sysbus LoadELF $ORIGIN/../../zephyr/button_pico/build/zephyr/zephyr.elf
+    cpu0 VectorTableOffset `sysbus GetSymbolAddress "_vector_table"`
     cpu1 IsHalted true
     cpu0 EnableProfilerCollapsedStack $ORIGIN/button-profile true
 """

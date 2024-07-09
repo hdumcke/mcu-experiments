@@ -1,4 +1,4 @@
-logFile $ORIGIN/blinky-renode.log True
+logFile $ORIGIN/blinky.log True
 
 using sysbus
 $name?="rpi_pico"

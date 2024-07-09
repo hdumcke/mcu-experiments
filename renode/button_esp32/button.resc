@@ -1,0 +1,21 @@
+logFile $ORIGIN/button.log True
+
+using sysbus
+$name?="esp32@"
+mach create $name
+
+machine LoadPlatformDescription $ORIGIN/button.repl
+# machine LoadPlatformDescriptionFromString "button: Miscellaneous.Button @ gpioc { IRQ -> gpioc@0xd }"
+
+# showAnalyzer usart2
+# usart2 RecordToAsciinema $ORIGIN/button-asciinema
+
+macro reset
+"""
+    sysbus LoadELF $ORIGIN/../../zephyr/button_esp32/build/zephyr/zephyr.elf
+#    cpu0 VectorTableOffset `sysbus GetSymbolAddress "_vector_table"`
+    cpu0 VectorTableOffset 0x0000000010000100
+    cpu0 EnableProfilerCollapsedStack $ORIGIN/button-profile true
+"""
+
+runMacro $reset
