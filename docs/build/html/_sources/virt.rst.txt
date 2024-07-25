@@ -36,7 +36,7 @@ https://download.mono-project.com/archive/2.10.6/macos-10-x86/1/MonoFramework-MR
    echo "#required for renode" >> ~/.bash_profile
    echo PATH=/Library/Frameworks/Mono.framework/Versions/Current/bin:\$PATH >> ~/.bash_profile
    mkvirtualenv renode
-   ./renode/setup-wirtenv.sh
+   ./renode/setup-virtenv.sh
 
 PlatformIO Integration
 ^^^^^^^^^^^^^^^^^^^^^^

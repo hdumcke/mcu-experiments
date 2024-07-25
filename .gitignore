@@ -51,6 +51,8 @@ renode/button_pico/report.html
 renode/button_pico/robot_output.xml
 renode/button_pico/button-asciinema
 renode/button_pico/button-profile
+renode/button_pico/logs
+renode/button_pico/snapshots
 renode/button_esp32/button.log*
 renode/button_esp32/button.repl
 renode/button_esp32/log.html
@@ -58,13 +60,17 @@ renode/button_esp32/report.html
 renode/button_esp32/robot_output.xml
 renode/button_esp32/button-asciinema
 renode/button_esp32/button-profile
-renode/button_nucleo/button-renode.log*
+renode/button_esp32/logs
+renode/button_esp32/snapshots
+renode/button_nucleo/button.log*
 renode/button_nucleo/button.repl
 renode/button_nucleo/log.html
 renode/button_nucleo/report.html
 renode/button_nucleo/robot_output.xml
 renode/button_nucleo/button-asciinema
 renode/button_nucleo/button-profile
+renode/button_pico/logs
+renode/button_pico/snapshots
 renode/blinky_pico/logs
 renode/blinky_pico/snapshots
 renode/blinky_pico/blinky-asciinema
