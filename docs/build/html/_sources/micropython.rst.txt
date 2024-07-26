@@ -36,4 +36,28 @@ Sample session:
    cp blink.py /pyboard/main.py
    ls -l /pyboard
    repl ~ machine.reset() ~
+   
+webrepl
+^^^^^^^
 
+You can access REPL over Wifi. The installation procedure requires the presence of a boot.py file on the board. 
+
+Board installation:
+
+.. code-block:: bash
+
+   import webrepl_setup  # answer the questions
+
+Local installation:
+
+.. code-block:: bash
+
+   git clone https://github.com/micropython/webrepl
+
+Usage:
+
+.. code-block:: bash
+
+   open webrepl/webrepl.html
+   
+   # connect to 192.168.1.67:8266 where you replace 192.168.1.67 with the IP address of your board

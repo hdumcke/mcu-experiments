@@ -3,7 +3,7 @@ from time import sleep_ms
 
 dt = 0.02  # 50 Hz
 wheel_diameter = 0.0336
-ENCODER_TICKS_PER_REVOLUTION = 205
+ENCODER_TICKS_PER_REVOLUTION = 356
 
 gpioEncAc1 = 0
 gpioEncAc2 = 1

@@ -8,8 +8,8 @@ gpioPWB = 13
 gpioAN1 = 11
 gpioAN2 = 12
 
-gpioBN1 = 14
-gpioBN2 = 15
+gpioBN1 = 15
+gpioBN2 = 14
 
 gpioStandby = 20
 
@@ -24,7 +24,7 @@ pinSTANDBY.high()
 motorA.motorControl(5000)
 motorB.motorControl(5000)
 
-sleep(10)
+sleep(5)
 
 motorA.motorControl(0)
 motorB.motorControl(0)

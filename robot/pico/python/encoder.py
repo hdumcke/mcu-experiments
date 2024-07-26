@@ -11,9 +11,9 @@ class Encoder:
     def handle_interrupt(self, pin):
         a = self.px.value()
         if a > 0:
-            self.pos = self.pos + 1
-        else:
             self.pos = self.pos - 1
+        else:
+            self.pos = self.pos + 1
 
     def __init__(self, c1, c2, wheel_diameter, ticks_per_rotation, dt):
         self.px = Pin(c1, Pin.IN)

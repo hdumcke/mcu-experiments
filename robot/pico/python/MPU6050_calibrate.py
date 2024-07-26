@@ -14,7 +14,9 @@ accel_cum = [0.0] * 3
 # wake up the MPU6050 from sleep
 mpu.wake()
 
-# continuously print the data
+# let robot settle
+time.sleep(5)
+
 for i in range(100):
     gyro = list(mpu.read_gyro_data())
     accel = list(mpu.read_accel_data())
@@ -23,5 +25,7 @@ for i in range(100):
         accel_cum[k] += accel[k]
     time.sleep(0.1)
 
-print("gyro_cal = [ %.4f, %.4f, %.4f]" % (gyro_cum[0] / 100.0, gyro_cum[1] / 100.0, gyro_cum[2] / 100.0))
-print("accel_cal = [ %.4f, %.4f, %.4f]" % (accel_cum[0] / 100.0, accel_cum[1] / 100.0, accel_cum[2] / 100.0))
+
+with open("calibration.py", 'w') as fh:
+    fh.write("gyro_cal = [%.4f, %.4f, %.4f]\n" % (gyro_cum[0] / 100.0, gyro_cum[1] / 100.0, gyro_cum[2] / 100.0))
+    fh.write("accel_cal = [%.4f, %.4f, %.4f]" % (accel_cum[0] / 100.0, accel_cum[1] / 100.0, accel_cum[2] / 100.0))

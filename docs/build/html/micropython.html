@@ -64,6 +64,24 @@ repl<span class="w"> </span>~<span class="w"> </span>machine.reset<span class="o
 </pre></div>
 </div>
 </section>
+<section id="webrepl">
+<h2>webrepl<a class="headerlink" href="#webrepl" title="Permalink to this heading">¶</a></h2>
+<p>You can access REPL over Wifi. The installation procedure requires the presence of a boot.py file on the board.</p>
+<p>Board installation:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>import<span class="w"> </span>webrepl_setup<span class="w">  </span><span class="c1"># answer the questions</span>
+</pre></div>
+</div>
+<p>Local installation:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>git<span class="w"> </span>clone<span class="w"> </span>https://github.com/micropython/webrepl
+</pre></div>
+</div>
+<p>Usage:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>open<span class="w"> </span>webrepl/webrepl.html
+
+<span class="c1"># connect to 192.168.1.67:8266 where you replace 192.168.1.67 with the IP address of your board</span>
+</pre></div>
+</div>
+</section>
 </section>
 
 
@@ -95,6 +113,7 @@ repl<span class="w"> </span>~<span class="w"> </span>machine.reset<span class="o
 <li class="toctree-l1"><a class="reference internal" href="robot.html">Robot Example</a></li>
 <li class="toctree-l1 current"><a class="current reference internal" href="#">Micro Python</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="#rshell">rshell</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#webrepl">webrepl</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="microros.html">micro-ROS</a></li>

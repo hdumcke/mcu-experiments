@@ -10,8 +10,8 @@ gpioPWB = 13
 gpioAN1 = 11
 gpioAN2 = 12
 
-gpioBN1 = 14
-gpioBN2 = 15
+gpioBN1 = 15
+gpioBN2 = 14
 
 gpioStandby = 20
 
@@ -21,7 +21,7 @@ gpioEncAc2 = 1
 gpioEncBc1 = 2
 gpioEncBc2 = 3
 
-ENCODER_TICKS_PER_REVOLUTION = 205
+ENCODER_TICKS_PER_REVOLUTION = 356
 # wheel diameter [m]
 wheel_diameter = 0.0336
 

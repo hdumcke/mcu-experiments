@@ -51,29 +51,6 @@ class Motor:
             self.in1.low()
             self.in2.low()
 
-    # Determine if Pin ID is one of the GPIO Pins associated with this motor
-    def usesPin(self, pinID: int):
-        if (pinID == self.gpioPWM or pinID == self.gpioIN1 or pinID == self.gpioIN2):
-            return True
-        else:
-            return False
-
-    # Return the configured GPIO Pin object
-    def pwm(self):
-        return self.gpioPWM
-
-    # Returns the GPIO Pin object for IN1
-    def signal1Pin(self):
-        return self.in1
-
-    # Returns the GPIO Pin object for IN2
-    def signal2Pin(self):
-        return self.in2
-
-    # Returns what the IN1 Pin should be set to: True == HIGH, False == LOW
-    def signal1(self):
-        return self.IN1Value
-
     # Returns what the IN2 Pin should be set to: True == HIGH, False == LOW
     def signal2(self):
         return self.IN2Value
