@@ -3,20 +3,27 @@ from time import sleep
 from wifi_credentials import ssid, password
 
 
-def connect():
-    # Connect to WLAN
-    wlan = network.WLAN(network.STA_IF)
-    wlan.active(True)
-    wlan.connect(ssid, password)
+class Wifi:
+    def __init__(self):
+        self.wlan = network.WLAN(network.STA_IF)
 
-    counter = 0
-    while not wlan.isconnected():
-        print('Waiting for connection...')
-        sleep(1)
-        counter += 1
-        if counter > 20:
-            return False
+    def connect(self):
+        # Connect to WLAN
+        self.wlan.active(True)
+        self.wlan.connect(ssid, password)
 
-    ip = wlan.ifconfig()[0]
-    print(f'Connected on {ip}')
-    return True
+        counter = 0
+        while not self.wlan.isconnected():
+            print('Waiting for connection...')
+            sleep(1)
+            counter += 1
+            if counter > 20:
+                return False
+
+        return True
+
+    def get_ip(self):
+        if self.wlan.isconnected():
+            return self.wlan.ifconfig()[0]
+        else:
+            return None

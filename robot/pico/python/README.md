@@ -11,14 +11,17 @@ in rshell:
 
 ```bash
 cp MPU6050.py /pyboard/
-cp MPU6050_calibrate.py /pyboard/
-cp MPU6050_test.py /pyboard/
+cp imu.py /pyboard/
+cp gyro.py /pyboard/
 cp PID.py /pyboard/
 cp boot.py /pyboard/
+cp parameters.py /pyboard/
 cp controller.py /pyboard/
 cp dc_motor_pid.py /pyboard/
-cp encoder.py /pyboard/
+cp encoder_pio.py /pyboard/
 cp motor.py /pyboard/
+cp robot.py /pyboard/
+cp robot_state.py /pyboard/
 cp wifi.py /pyboard/
 cp wifi_credentials.py /pyboard/
 ```
