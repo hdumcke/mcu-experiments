@@ -42,6 +42,9 @@ class RobotParameters:
         self.add_param('robot_acc', 'float', 3)
         self.add_param('encoder_speed', 'float', 2)
 
+        self.add_param('gyro_vw', 'float', 1)
+        self.add_param('gyro_w', 'float', 1)
+
     def add_param(self, name, param_type, length):
         self.robot_params[name] = {}
         self.robot_params[name]['timestamp'] = time()

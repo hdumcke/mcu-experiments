@@ -11,7 +11,7 @@ class Gyro:
     def __init__(self):
         self.last_time_us = ticks_us()
         self.locked = False
-        self.dt = 0.000001  # 1Khx
+        self.dt = 0.0
         self.bias_update_counter = 0
         self.mean = 0.0
         self.variance = 0.0
@@ -20,13 +20,12 @@ class Gyro:
         self.angle_filtered = 0.0
 
     def process(self, speed):
-        #current_time_us = ticks_us()
-        #dt_us = current_time_us - self.last_time_us
-        #self.last_time_us = current_time_us
-        #self.dt = dt_us / 1000000.0
+        current_time_us = ticks_us()
+        dt_us = current_time_us - self.last_time_us
+        self.last_time_us = current_time_us
+        self.dt = dt_us / 1000000.0
         self.mean = ALPHA_MEAN * speed + (1.0 - ALPHA_MEAN) * self.mean
         self.variance = ALPHA_VARIANCE * (speed - self.mean)**2 + (1.0 - ALPHA_VARIANCE) * self.variance
-        return
         if abs(self.variance) < ALPHA_VARIANCE_LOW_THRESHOLD:
             self.bias = ALPHA_BIAS * self.mean + (1.0 - ALPHA_BIAS) * self.bias
             self.bias_update_counter += 1

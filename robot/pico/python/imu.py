@@ -1,5 +1,6 @@
 from machine import I2C, Pin
 import MPU6050
+from math import pi
 
 
 class IMU:
@@ -23,6 +24,9 @@ class IMU:
         self.cb = cb
 
     def read(self):
-        gyro = list(self.mpu.read_gyro_data())
+        # We can not use mpu.read_gyro_data() as it does two reads via i2c
+        data = self.mpu.i2c.readfrom_mem(self.mpu.address, 0x43, 6)  # read 6 bytes (gyro data)
+        # 1 / 16.384 * pi / 180.0 = 0.001065264
+        z = (self.mpu._translate_pair(data[4], data[5])) * 0.001065264
         if self.cb:
-            self.cb(gyro[2])
+            self.cb(z)
