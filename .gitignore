@@ -90,3 +90,5 @@ renode/blinky_nucleo/snapshots
 pico-examples
 pico-micropython-examples
 rpi-pico-mpu6050
+picow_ds4
+robot/pico/c/bt/bt

@@ -3,9 +3,9 @@ from motor import Motor
 from time import sleep
 
 gpioPWA = 10
-gpioPWB = 13
+gpioPWB = 11
 
-gpioAN1 = 11
+gpioAN1 = 13
 gpioAN2 = 12
 
 gpioBN1 = 15
@@ -28,3 +28,6 @@ sleep(5)
 
 motorA.motorControl(0)
 motorB.motorControl(0)
+
+motorA.motorControl(2**16)
+motorB.motorControl(2**16)

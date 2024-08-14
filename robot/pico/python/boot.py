@@ -22,4 +22,4 @@ if not rp2.bootsel_button():
             sleep(1)
 
     # start robot
-    import robot  # noqa
+    # import robot  # noqa

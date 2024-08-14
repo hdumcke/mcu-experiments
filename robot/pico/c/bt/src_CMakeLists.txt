@@ -1,0 +1,31 @@
+add_executable(robot_bt
+	main.c
+	motor.c
+	robot_parameters.c
+	bt_hid.c
+)
+
+pico_enable_stdio_uart(robot_bt 1)
+pico_enable_stdio_semihosting(robot_bt 0)
+
+target_compile_definitions(robot_bt PRIVATE
+	PICO_DEFAULT_UART_TX_PIN=16
+	PICO_DEFAULT_UART_RX_PIN=17
+)
+
+target_include_directories(robot_bt PRIVATE
+	${CMAKE_CURRENT_LIST_DIR}
+)
+
+target_link_libraries(robot_bt
+	hardware_pwm
+	hardware_gpio
+	pico_stdlib
+	pico_cyw43_arch_none
+        pico_btstack_classic
+        pico_btstack_ble
+        pico_btstack_cyw43
+	pico_multicore
+)
+
+pico_add_extra_outputs(robot_bt)

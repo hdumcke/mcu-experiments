@@ -5,9 +5,9 @@ from PID import PID
 from time import time, ticks_ms
 
 gpioPWA = 10
-gpioPWB = 13
+gpioPWB = 11
 
-gpioAN1 = 11
+gpioAN1 = 13
 gpioAN2 = 12
 
 gpioBN1 = 15
