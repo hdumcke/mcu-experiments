@@ -13,8 +13,6 @@ gpioBN2 = 14
 
 gpioStandby = 20
 
-gpioLED = 25
-
 motorA = Motor(gpioPWA, gpioAN1, gpioAN2)
 motorB = Motor(gpioPWB, gpioBN1, gpioBN2)
 
@@ -29,5 +27,5 @@ sleep(5)
 motorA.motorControl(0)
 motorB.motorControl(0)
 
-motorA.motorControl(2**16)
-motorB.motorControl(2**16)
+motorA.motorControl(2**16-1)
+motorB.motorControl(2**16-1)
