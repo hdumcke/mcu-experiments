@@ -24,7 +24,7 @@ gpioEncAc2 = 1
 gpioEncBc1 = 2
 gpioEncBc2 = 3
 
-ENCODER_TICKS_PER_REVOLUTION = 356
+ENCODER_TICKS_PER_REVOLUTION = 1430
 # wheel diameter [m]
 wheel_diameter = 0.0336
 wheel_perimeter = wheel_diameter * pi
@@ -58,13 +58,15 @@ class Controller:
         self.params.add_param('setpoint', 'float', 2)
         self.params.add_param('motor_pwm', 'int', 2)
         self.params.add_param('pid_error', 'float', 2)
-        self.params.add_param('pid_components', 'float', 3)
+        self.params.add_param('pid_components_x', 'float', 3)
+        self.params.add_param('pid_components_w', 'float', 3)
         self.motorA = Motor(gpioPWA, gpioAN1, gpioAN2)
         self.motorB = Motor(gpioPWB, gpioBN1, gpioBN2)
         self.pinSTANDBY = Pin(gpioStandby, mode=Pin.OUT)
         self.encL = Encoder(gpioEncAc1, gpioEncAc2, ENCODER_TICKS_PER_REVOLUTION, self.dt, sm_id=0)
         self.encR = Encoder(gpioEncBc1, gpioEncBc2, ENCODER_TICKS_PER_REVOLUTION, self.dt, sm_id=1)
         self.robot_state = RobotState(self.encL, self.encR, wheel_diameter, wheel_dist, self.dt, params)
+        self.state_timer = Timer(freq=100, mode=Timer.PERIODIC, callback=self.robot_state.process)
         self.x_pid = PID(x_Kp, x_Kd, x_Ki, setpoint=0, output_limits=[-pwm_max, pwm_max], scale='us')
         self.w_pid = PID(w_Kp, w_Kd, w_Ki, setpoint=0, output_limits=[-pwm_max, pwm_max], scale='us')
         self.setpoint_vx = 0.0
@@ -84,6 +86,8 @@ class Controller:
         self.pinSTANDBY.low()
         self.x_pid.reset()
         self.w_pid.reset()
+        self.params.update_param('pid_components_x', list(self.x_pid.components))
+        self.params.update_param('pid_components_w', list(self.w_pid.components))
 
     def set_speed(self, vx, vw):
         self.setpoint_vx = vx
@@ -91,9 +95,7 @@ class Controller:
         self.setpoint_timestamp = time()
 
     def run(self):
-        self.robot_state.process(0)
-        # correct motor direction
-        left_speed_mps = -self.params.robot_params['encoder_speed']['value'][0] * wheel_perimeter / 60.0
+        left_speed_mps = self.params.robot_params['encoder_speed']['value'][0] * wheel_perimeter / 60.0
         right_speed_mps = self.params.robot_params['encoder_speed']['value'][1] * wheel_perimeter / 60.0
         actual_vx = (left_speed_mps + right_speed_mps) / 2.0
         actual_vw = -(left_speed_mps - right_speed_mps) / wheel_dist * 2
@@ -126,7 +128,8 @@ class Controller:
         self.w_pid.setpoint = self.setpoint_vw_profil
 
         self.params.update_param('pid_error', [self.setpoint_vx - self.actual_vx_filtered, self.setpoint_vw - self.actual_vw_filtered])
-        self.params.update_param('pid_components', list(self.x_pid.components))
+        self.params.update_param('pid_components_x', list(self.x_pid.components))
+        self.params.update_param('pid_components_w', list(self.w_pid.components))
         x_speed = self.x_pid.__call__(self.actual_vx_filtered)
         w_speed = self.w_pid.__call__(self.actual_vw_filtered)
 

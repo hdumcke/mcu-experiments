@@ -87,8 +87,10 @@ renode/blinky_nucleo/report.html
 renode/blinky_nucleo/robot_output.xml
 renode/blinky_nucleo/logs
 renode/blinky_nucleo/snapshots
-pico-examples
-pico-micropython-examples
-rpi-pico-mpu6050
-picow_ds4
+pico-examples/pico-examples
+pico-examples/pico-micropython-examples
+pico-examples/vha3
+pico-examples/pico-mpu6050
+pico-examples/picow_ds4
+pico-examples/pico-vl53l0x
 robot/pico/c/bt/bt
