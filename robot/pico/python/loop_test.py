@@ -2,7 +2,7 @@ parameters import TelePlot
 from time import ticks_us
 from machine import Timer
 
-tele_plot = TelePlot("192.168.1.32")
+tele_plot = TelePlot("192.168.1.20")
 last_time = ticks_us()
 cb_cnt = 0
 

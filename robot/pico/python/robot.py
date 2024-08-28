@@ -8,7 +8,7 @@ from robot_state import RobotState
 from time import ticks_ms
 from math import pi
 
-params = RobotParameters("192.168.1.32")
+params = RobotParameters("192.168.1.20")
 server = ParamServer(params)
 last_called = ticks_ms()
 frequency = 100  # Hz

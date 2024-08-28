@@ -11,7 +11,7 @@ wheel_diameter = 0.0336
 wheel_perimeter = wheel_diameter * pi
 wheel_dist = 0.077
 
-params = RobotParameters("192.168.1.32")
+params = RobotParameters("192.168.1.20")
 
 
 def teleplot(t):
@@ -35,11 +35,11 @@ gpioBN2 = 14
 
 gpioStandby = 20
 
-gpioEncAc1 = 0
-gpioEncAc2 = 1
+gpioEncAc1 = 2
+gpioEncAc2 = 3
 
-gpioEncBc1 = 2
-gpioEncBc2 = 3
+gpioEncBc1 = 0
+gpioEncBc2 = 1
 
 ENCODER_TICKS_PER_REVOLUTION = 1430
 
@@ -56,8 +56,8 @@ state_timer = Timer(freq=100, mode=Timer.PERIODIC, callback=robot_state.process)
 pinSTANDBY = Pin(gpioStandby, mode=Pin.OUT)
 pinSTANDBY.high()
 
-motorL.motorControl(5000)
-motorR.motorControl(5000)
+motorL.motorControl(3000)
+motorR.motorControl(3000)
 
 sleep(5)
 

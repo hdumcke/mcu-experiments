@@ -8,7 +8,7 @@ wheel_diameter = 0.0336
 wheel_perimeter = wheel_diameter * pi
 wheel_dist = 0.077
 
-params = RobotParameters("192.168.1.32")
+params = RobotParameters("192.168.1.20")
 controller = Controller(6000.0, 5000.0, 100.0,
                         0.0, 0.0, 0.0,
                         params)

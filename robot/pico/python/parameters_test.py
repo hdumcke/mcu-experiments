@@ -2,7 +2,7 @@ import asyncio
 from parameters import RobotParameters, ParamServer
 from time import ticks_ms
 
-params = RobotParameters("192.168.1.32")
+params = RobotParameters("192.168.1.20")
 server = ParamServer(params)
 last_called = ticks_ms()
 

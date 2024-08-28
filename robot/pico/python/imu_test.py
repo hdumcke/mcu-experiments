@@ -6,7 +6,7 @@ from machine import Pin
 from math import pi
 
 gyro = Gyro()
-params = RobotParameters("192.168.1.32")
+params = RobotParameters("192.168.1.20")
 
 
 def imu_cb(wz):

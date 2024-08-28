@@ -17,11 +17,12 @@ cp PID.py /pyboard/
 cp boot.py /pyboard/
 cp parameters.py /pyboard/
 cp controller.py /pyboard/
-cp dc_motor_pid.py /pyboard/
 cp encoder_pio.py /pyboard/
 cp motor.py /pyboard/
 cp robot.py /pyboard/
 cp robot_state.py /pyboard/
+cp feedforward.py /pyboard/
+cp speed_controller.py /pyboard/
 cp wifi.py /pyboard/
 cp wifi_credentials.py /pyboard/
 ```
