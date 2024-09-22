@@ -198,6 +198,7 @@ mkdir<span class="w"> </span>build
 <span class="nb">export</span><span class="w"> </span><span class="nv">PICO_SDK_PATH</span><span class="o">=</span>../../pico-sdk
 cmake<span class="w"> </span>..
 make
+sudo<span class="w"> </span>make<span class="w"> </span>install
 </pre></div>
 </div>
 <p>Flash example:</p>
@@ -206,6 +207,28 @@ make
 <span class="nv">$PICODIR</span>/picotool/build/picotool<span class="w"> </span>load<span class="w"> </span>./hello_world/usb/hello_usb.uf2
 <span class="nv">$PICODIR</span>/picotool/build/picotool<span class="w"> </span>reboot
 screen<span class="w"> </span>/dev/cu.usbmodem1424301
+</pre></div>
+</div>
+</section>
+<section id="pico-programming-using-raspberry-pi">
+<h3>Pico Programming using Raspberry Pi<a class="headerlink" href="#pico-programming-using-raspberry-pi" title="Permalink to this heading">¶</a></h3>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>sudo<span class="w"> </span>apt<span class="w"> </span>install<span class="w"> </span>-y<span class="w"> </span>cmake<span class="w"> </span>gcc-arm-none-eabi<span class="w"> </span>libnewlib-arm-none-eabi<span class="w"> </span>libstdc++-arm-none-eabi-newlib
+git<span class="w"> </span>clone<span class="w"> </span>--recursive<span class="w"> </span>-b<span class="w"> </span>master<span class="w"> </span>https://github.com/raspberrypi/pico-sdk.git
+git<span class="w"> </span>clone<span class="w"> </span>-b<span class="w"> </span>master<span class="w"> </span>https://github.com/raspberrypi/pico-examples.git
+git<span class="w"> </span>clone<span class="w"> </span>https://github.com/raspberrypi/picotool.git<span class="w"> </span>--branch<span class="w"> </span>master
+mkdir<span class="w"> </span>picotool/build
+<span class="nb">cd</span><span class="w"> </span>picotool/build
+<span class="nb">export</span><span class="w"> </span><span class="nv">PICO_SDK_PATH</span><span class="o">=</span>../../pico-sdk
+cmake<span class="w"> </span>..
+make
+sudo<span class="w"> </span>make<span class="w"> </span>install
+<span class="nb">cd</span><span class="w"> </span>../..
+mkdir<span class="w"> </span>pico-examples/build
+<span class="nb">cd</span><span class="w"> </span>pico-examples/build
+<span class="nb">export</span><span class="w"> </span><span class="nv">PICO_SDK_PATH</span><span class="o">=</span>../../pico-sdk
+cmake<span class="w"> </span>..
+make
+openocd<span class="w"> </span>-f<span class="w"> </span>interface/cmsis-dap.cfg<span class="w"> </span>-f<span class="w"> </span>target/rp2040.cfg<span class="w"> </span>-c<span class="w"> </span><span class="s2">&quot;adapter speed 5000&quot;</span><span class="w"> </span>-c<span class="w"> </span><span class="s2">&quot;program blink/blink.elf verify reset exit&quot;</span>
 </pre></div>
 </div>
 </section>
@@ -424,6 +447,7 @@ pio<span class="w"> </span>run<span class="w"> </span>-e<span class="w"> </span>
 <li class="toctree-l1"><a class="reference internal" href="micropython.html">Micro Python</a></li>
 <li class="toctree-l1"><a class="reference internal" href="microros.html">micro-ROS</a></li>
 <li class="toctree-l1"><a class="reference internal" href="architecture.html">Architecture</a></li>
+<li class="toctree-l1"><a class="reference internal" href="benchmarks.html">Benchmarks</a></li>
 </ul>
 
 <div class="relations">

@@ -151,6 +151,7 @@ picotool
    export PICO_SDK_PATH=../../pico-sdk
    cmake ..
    make
+   sudo make install
    
 Flash example:
 
@@ -192,6 +193,29 @@ Debug example:
 
 TODO: compile with debugging symbols
       Run debugger with vi
+
+Pico Programming using Raspberry Pi
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+.. code-block:: bash
+
+   sudo apt install -y cmake gcc-arm-none-eabi libnewlib-arm-none-eabi libstdc++-arm-none-eabi-newlib
+   git clone --recursive -b master https://github.com/~/pico-sdk.git
+   git clone -b master https://github.com/~co-examples.git
+   git clone https://github.com/~/picotool.git --branch master
+   mkdir picotool/build
+   cd picotool/build
+   export PICO_SDK_PATH=../../pico-sdk
+   cmake ..
+   make
+   sudo make install
+   cd ../..
+   mkdir pico-examples/build
+   cd pico-examples/build
+   export PICO_SDK_PATH=../../pico-sdk
+   cmake ..
+   make
+   openocd -f interface/cmsis-dap.cfg -f target/rp2040.cfg -c "adapter speed 5000" -c "program blink/blink.elf verify reset exit"
    
 Arduino IDE
 -----------

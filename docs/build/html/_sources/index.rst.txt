@@ -21,5 +21,6 @@ Welcome to MCU experiments's documentation!
    micropython
    microros
    architecture
+   benchmarks
 
 
