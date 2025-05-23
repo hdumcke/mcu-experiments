@@ -1,8 +1,5 @@
-# %%
 from build123d import *
-from ocp_vscode import *
 
-# %%
 outer_length = 65.0
 outer_width = 10.0
 hight = 12.0
@@ -14,7 +11,10 @@ screw_hole = 2.0
 screw_pos_x = outer_length / 2 - screw_support_plate
 screw_pos_y = outer_width / 2 + 2 * screw_hole
 
-# %%
+stopper_width = 2.2
+stopper_depth = 0.5
+stopper_pos_x = outer_length / 2 - (5.6 + stopper_width/2)
+
 with BuildPart() as holder:
     with BuildSketch() as holder_sk:
         Rectangle(outer_length, outer_width + 2 * wall_thickness)
@@ -39,7 +39,14 @@ with BuildPart() as holder:
     with BuildSketch() as holder_sk:
         with Locations((0.0, (outer_width + wall_thickness) / 2)):
             Rectangle(slot_length, wall_thickness)
+        with Locations((stopper_pos_x, outer_width/2)):
+            Rectangle(stopper_width, 2*stopper_depth)
+        with Locations((stopper_pos_x, -outer_width/2)):
+            Rectangle(stopper_width, 2*stopper_depth)
+        with Locations((-stopper_pos_x, outer_width/2)):
+            Rectangle(stopper_width, 2*stopper_depth)
+        with Locations((-stopper_pos_x, -outer_width/2)):
+            Rectangle(stopper_width, 2*stopper_depth)
     extrude(amount=hight + wall_thickness)
-show(holder)
-# %%
+
 holder.part.export_stl('motor-holder.stl')
